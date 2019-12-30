@@ -6,21 +6,20 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
-    private final ByteBuf firstMessage;
 
-    public ClientHandler(){
-        firstMessage = Unpooled.buffer(100);
-        for (int i = 0; i < firstMessage.capacity();i ++){
-            firstMessage.writeByte((byte) i);
-        }
-    }
 
     public void channelActive(ChannelHandlerContext ctx){
-        ctx.writeAndFlush(firstMessage);
+        ByteBuf buf = Unpooled.buffer(1);
+        buf.writeBytes(new byte[]{'a'});
+        ctx.writeAndFlush(buf);
     }
 
     public void channelRead(ChannelHandlerContext ctx,Object msg){
-        System.out.println(msg);
+        ByteBuf buf = (ByteBuf)msg;
+        int len = buf.readableBytes();
+        byte[] server = new byte[len];
+        buf.readBytes(server);
+        System.out.println(new String(server));
     }
 
     public void exceptionCaught(ChannelHandlerContext ctx,Throwable cause){
