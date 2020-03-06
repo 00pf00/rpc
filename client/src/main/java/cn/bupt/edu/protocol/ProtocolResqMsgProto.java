@@ -4,1041 +4,1158 @@
 package cn.bupt.edu.protocol;
 
 public final class ProtocolResqMsgProto {
-  private ProtocolResqMsgProto() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
+    private ProtocolResqMsgProto() {
+    }
 
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
-  }
-  public interface ProtocolRespMsgOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ProtocolRespMsg)
-      com.google.protobuf.MessageOrBuilder {
+    public static void registerAllExtensions(
+            com.google.protobuf.ExtensionRegistryLite registry) {
+    }
 
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The uuid.
-     */
-    String getUuid();
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The bytes for uuid.
-     */
-    com.google.protobuf.ByteString
+    public static void registerAllExtensions(
+            com.google.protobuf.ExtensionRegistry registry) {
+        registerAllExtensions(
+                (com.google.protobuf.ExtensionRegistryLite) registry);
+    }
+
+    public interface ProtocolRespMsgOrBuilder extends
+            // @@protoc_insertion_point(interface_extends:ProtocolRespMsg)
+            com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>string uuid = 1;</code>
+         *
+         * @return The uuid.
+         */
+        String getUuid();
+
+        /**
+         * <code>string uuid = 1;</code>
+         *
+         * @return The bytes for uuid.
+         */
+        com.google.protobuf.ByteString
         getUuidBytes();
 
-    /**
-     * <code>int32 version = 2;</code>
-     * @return The version.
-     */
-    int getVersion();
+        /**
+         * <code>int32 version = 2;</code>
+         *
+         * @return The version.
+         */
+        int getVersion();
 
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @return A list containing the chain.
-     */
-    java.util.List<String>
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @return A list containing the chain.
+         */
+        java.util.List<String>
         getChainList();
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @return The count of chain.
-     */
-    int getChainCount();
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @param index The index of the element to return.
-     * @return The chain at the given index.
-     */
-    String getChain(int index);
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the chain at the given index.
-     */
-    com.google.protobuf.ByteString
+
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @return The count of chain.
+         */
+        int getChainCount();
+
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @param index The index of the element to return.
+         * @return The chain at the given index.
+         */
+        String getChain(int index);
+
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @param index The index of the value to return.
+         * @return The bytes of the chain at the given index.
+         */
+        com.google.protobuf.ByteString
         getChainBytes(int index);
 
-    /**
-     * <code>int32 status = 4;</code>
-     * @return The status.
-     */
-    int getStatus();
+        /**
+         * <code>int32 status = 4;</code>
+         *
+         * @return The status.
+         */
+        int getStatus();
 
-    /**
-     * <code>bytes body = 5;</code>
-     * @return The body.
-     */
-    com.google.protobuf.ByteString getBody();
-  }
-  /**
-   * Protobuf type {@code ProtocolRespMsg}
-   */
-  public  static final class ProtocolRespMsg extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ProtocolRespMsg)
-      ProtocolRespMsgOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ProtocolRespMsg.newBuilder() to construct.
-    private ProtocolRespMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ProtocolRespMsg() {
-      uuid_ = "";
-      chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      body_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>bytes body = 5;</code>
+         *
+         * @return The body.
+         */
+        com.google.protobuf.ByteString getBody();
     }
 
-    @Override
-    @SuppressWarnings({"unused"})
-    protected Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ProtocolRespMsg();
-    }
-
-    @Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ProtocolRespMsg(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              String s = input.readStringRequireUtf8();
-
-              uuid_ = s;
-              break;
-            }
-            case 16: {
-
-              version_ = input.readInt32();
-              break;
-            }
-            case 26: {
-              String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                chain_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              chain_.add(s);
-              break;
-            }
-            case 32: {
-
-              status_ = input.readInt32();
-              break;
-            }
-            case 42: {
-
-              body_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          chain_ = chain_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
-    }
-
-    @Override
-    protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              ProtocolRespMsg.class, Builder.class);
-    }
-
-    public static final int UUID_FIELD_NUMBER = 1;
-    private volatile Object uuid_;
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The uuid.
-     */
-    public String getUuid() {
-      Object ref = uuid_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        uuid_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The bytes for uuid.
-     */
-    public com.google.protobuf.ByteString
-        getUuidBytes() {
-      Object ref = uuid_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
-        uuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int VERSION_FIELD_NUMBER = 2;
-    private int version_;
-    /**
-     * <code>int32 version = 2;</code>
-     * @return The version.
-     */
-    public int getVersion() {
-      return version_;
-    }
-
-    public static final int CHAIN_FIELD_NUMBER = 3;
-    private com.google.protobuf.LazyStringList chain_;
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @return A list containing the chain.
-     */
-    public com.google.protobuf.ProtocolStringList
-        getChainList() {
-      return chain_;
-    }
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @return The count of chain.
-     */
-    public int getChainCount() {
-      return chain_.size();
-    }
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @param index The index of the element to return.
-     * @return The chain at the given index.
-     */
-    public String getChain(int index) {
-      return chain_.get(index);
-    }
-    /**
-     * <code>repeated string chain = 3;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the chain at the given index.
-     */
-    public com.google.protobuf.ByteString
-        getChainBytes(int index) {
-      return chain_.getByteString(index);
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 4;
-    private int status_;
-    /**
-     * <code>int32 status = 4;</code>
-     * @return The status.
-     */
-    public int getStatus() {
-      return status_;
-    }
-
-    public static final int BODY_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString body_;
-    /**
-     * <code>bytes body = 5;</code>
-     * @return The body.
-     */
-    public com.google.protobuf.ByteString getBody() {
-      return body_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getUuidBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uuid_);
-      }
-      if (version_ != 0) {
-        output.writeInt32(2, version_);
-      }
-      for (int i = 0; i < chain_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, chain_.getRaw(i));
-      }
-      if (status_ != 0) {
-        output.writeInt32(4, status_);
-      }
-      if (!body_.isEmpty()) {
-        output.writeBytes(5, body_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getUuidBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uuid_);
-      }
-      if (version_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, version_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < chain_.size(); i++) {
-          dataSize += computeStringSizeNoTag(chain_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getChainList().size();
-      }
-      if (status_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, status_);
-      }
-      if (!body_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, body_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof ProtocolRespMsg)) {
-        return super.equals(obj);
-      }
-      ProtocolRespMsg other = (ProtocolRespMsg) obj;
-
-      if (!getUuid()
-          .equals(other.getUuid())) return false;
-      if (getVersion()
-          != other.getVersion()) return false;
-      if (!getChainList()
-          .equals(other.getChainList())) return false;
-      if (getStatus()
-          != other.getStatus()) return false;
-      if (!getBody()
-          .equals(other.getBody())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + UUID_FIELD_NUMBER;
-      hash = (53 * hash) + getUuid().hashCode();
-      hash = (37 * hash) + VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getVersion();
-      if (getChainCount() > 0) {
-        hash = (37 * hash) + CHAIN_FIELD_NUMBER;
-        hash = (53 * hash) + getChainList().hashCode();
-      }
-      hash = (37 * hash) + STATUS_FIELD_NUMBER;
-      hash = (53 * hash) + getStatus();
-      hash = (37 * hash) + BODY_FIELD_NUMBER;
-      hash = (53 * hash) + getBody().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static ProtocolRespMsg parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static ProtocolRespMsg parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static ProtocolRespMsg parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static ProtocolRespMsg parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static ProtocolRespMsg parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static ProtocolRespMsg parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static ProtocolRespMsg parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static ProtocolRespMsg parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static ProtocolRespMsg parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static ProtocolRespMsg parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static ProtocolRespMsg parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static ProtocolRespMsg parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(ProtocolRespMsg prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @Override
-    protected Builder newBuilderForType(
-        BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code ProtocolRespMsg}
      */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ProtocolRespMsg)
-        ProtocolRespMsgOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
-      }
+    public static final class ProtocolRespMsg extends
+            com.google.protobuf.GeneratedMessageV3 implements
+            // @@protoc_insertion_point(message_implements:ProtocolRespMsg)
+            ProtocolRespMsgOrBuilder {
+        private static final long serialVersionUID = 0L;
 
-      @Override
-      protected FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                ProtocolRespMsg.class, Builder.class);
-      }
-
-      // Construct using cn.bupt.edu.protocol.ProtocolResqMsgProto.ProtocolRespMsg.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        // Use ProtocolRespMsg.newBuilder() to construct.
+        private ProtocolRespMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+            super(builder);
         }
-      }
-      @Override
-      public Builder clear() {
-        super.clear();
-        uuid_ = "";
 
-        version_ = 0;
-
-        chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = 0;
-
-        body_ = com.google.protobuf.ByteString.EMPTY;
-
-        return this;
-      }
-
-      @Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
-      }
-
-      @Override
-      public ProtocolRespMsg getDefaultInstanceForType() {
-        return ProtocolRespMsg.getDefaultInstance();
-      }
-
-      @Override
-      public ProtocolRespMsg build() {
-        ProtocolRespMsg result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
+        private ProtocolRespMsg() {
+            uuid_ = "";
+            chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+            body_ = com.google.protobuf.ByteString.EMPTY;
         }
-        return result;
-      }
 
-      @Override
-      public ProtocolRespMsg buildPartial() {
-        ProtocolRespMsg result = new ProtocolRespMsg(this);
-        int from_bitField0_ = bitField0_;
-        result.uuid_ = uuid_;
-        result.version_ = version_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          chain_ = chain_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
+        @Override
+        @SuppressWarnings({"unused"})
+        protected Object newInstance(
+                UnusedPrivateParameter unused) {
+            return new ProtocolRespMsg();
         }
-        result.chain_ = chain_;
-        result.status_ = status_;
-        result.body_ = body_;
-        onBuilt();
-        return result;
-      }
 
-      @Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return super.setField(field, value);
-      }
-      @Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof ProtocolRespMsg) {
-          return mergeFrom((ProtocolRespMsg)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
+        @Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+            return this.unknownFields;
         }
-      }
 
-      public Builder mergeFrom(ProtocolRespMsg other) {
-        if (other == ProtocolRespMsg.getDefaultInstance()) return this;
-        if (!other.getUuid().isEmpty()) {
-          uuid_ = other.uuid_;
-          onChanged();
+        private ProtocolRespMsg(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            this();
+            if (extensionRegistry == null) {
+                throw new NullPointerException();
+            }
+            int mutable_bitField0_ = 0;
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+                    com.google.protobuf.UnknownFieldSet.newBuilder();
+            try {
+                boolean done = false;
+                while (!done) {
+                    int tag = input.readTag();
+                    switch (tag) {
+                        case 0:
+                            done = true;
+                            break;
+                        case 10: {
+                            String s = input.readStringRequireUtf8();
+
+                            uuid_ = s;
+                            break;
+                        }
+                        case 16: {
+
+                            version_ = input.readInt32();
+                            break;
+                        }
+                        case 26: {
+                            String s = input.readStringRequireUtf8();
+                            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                                chain_ = new com.google.protobuf.LazyStringArrayList();
+                                mutable_bitField0_ |= 0x00000001;
+                            }
+                            chain_.add(s);
+                            break;
+                        }
+                        case 32: {
+
+                            status_ = input.readInt32();
+                            break;
+                        }
+                        case 42: {
+
+                            body_ = input.readBytes();
+                            break;
+                        }
+                        default: {
+                            if (!parseUnknownField(
+                                    input, unknownFields, extensionRegistry, tag)) {
+                                done = true;
+                            }
+                            break;
+                        }
+                    }
+                }
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                throw e.setUnfinishedMessage(this);
+            } catch (java.io.IOException e) {
+                throw new com.google.protobuf.InvalidProtocolBufferException(
+                        e).setUnfinishedMessage(this);
+            } finally {
+                if (((mutable_bitField0_ & 0x00000001) != 0)) {
+                    chain_ = chain_.getUnmodifiableView();
+                }
+                this.unknownFields = unknownFields.build();
+                makeExtensionsImmutable();
+            }
         }
-        if (other.getVersion() != 0) {
-          setVersion(other.getVersion());
+
+        public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+            return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
         }
-        if (!other.chain_.isEmpty()) {
-          if (chain_.isEmpty()) {
-            chain_ = other.chain_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureChainIsMutable();
-            chain_.addAll(other.chain_);
-          }
-          onChanged();
+
+        @Override
+        protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+            return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_fieldAccessorTable
+                    .ensureFieldAccessorsInitialized(
+                            ProtocolRespMsg.class, Builder.class);
         }
-        if (other.getStatus() != 0) {
-          setStatus(other.getStatus());
+
+        public static final int UUID_FIELD_NUMBER = 1;
+        private volatile Object uuid_;
+
+        /**
+         * <code>string uuid = 1;</code>
+         *
+         * @return The uuid.
+         */
+        public String getUuid() {
+            Object ref = uuid_;
+            if (ref instanceof String) {
+                return (String) ref;
+            } else {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                uuid_ = s;
+                return s;
+            }
         }
-        if (other.getBody() != com.google.protobuf.ByteString.EMPTY) {
-          setBody(other.getBody());
+
+        /**
+         * <code>string uuid = 1;</code>
+         *
+         * @return The bytes for uuid.
+         */
+        public com.google.protobuf.ByteString
+        getUuidBytes() {
+            Object ref = uuid_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                uuid_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
 
-      @Override
-      public final boolean isInitialized() {
-        return true;
-      }
+        public static final int VERSION_FIELD_NUMBER = 2;
+        private int version_;
 
-      @Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        ProtocolRespMsg parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (ProtocolRespMsg) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
+        /**
+         * <code>int32 version = 2;</code>
+         *
+         * @return The version.
+         */
+        public int getVersion() {
+            return version_;
         }
-        return this;
-      }
-      private int bitField0_;
 
-      private Object uuid_ = "";
-      /**
-       * <code>string uuid = 1;</code>
-       * @return The uuid.
-       */
-      public String getUuid() {
-        Object ref = uuid_;
-        if (!(ref instanceof String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          uuid_ = s;
-          return s;
-        } else {
-          return (String) ref;
+        public static final int CHAIN_FIELD_NUMBER = 3;
+        private com.google.protobuf.LazyStringList chain_;
+
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @return A list containing the chain.
+         */
+        public com.google.protobuf.ProtocolStringList
+        getChainList() {
+            return chain_;
         }
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @return The bytes for uuid.
-       */
-      public com.google.protobuf.ByteString
-          getUuidBytes() {
-        Object ref = uuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b =
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
-          uuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
+
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @return The count of chain.
+         */
+        public int getChainCount() {
+            return chain_.size();
         }
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @param value The uuid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUuid(
-          String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
 
-        uuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearUuid() {
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @param index The index of the element to return.
+         * @return The chain at the given index.
+         */
+        public String getChain(int index) {
+            return chain_.get(index);
+        }
 
-        uuid_ = getDefaultInstance().getUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @param value The bytes for uuid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+        /**
+         * <code>repeated string chain = 3;</code>
+         *
+         * @param index The index of the value to return.
+         * @return The bytes of the chain at the given index.
+         */
+        public com.google.protobuf.ByteString
+        getChainBytes(int index) {
+            return chain_.getByteString(index);
+        }
 
-        uuid_ = value;
-        onChanged();
-        return this;
-      }
+        public static final int STATUS_FIELD_NUMBER = 4;
+        private int status_;
 
-      private int version_ ;
-      /**
-       * <code>int32 version = 2;</code>
-       * @return The version.
-       */
-      public int getVersion() {
-        return version_;
-      }
-      /**
-       * <code>int32 version = 2;</code>
-       * @param value The version to set.
-       * @return This builder for chaining.
-       */
-      public Builder setVersion(int value) {
+        /**
+         * <code>int32 status = 4;</code>
+         *
+         * @return The status.
+         */
+        public int getStatus() {
+            return status_;
+        }
 
-        version_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 version = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearVersion() {
+        public static final int BODY_FIELD_NUMBER = 5;
+        private com.google.protobuf.ByteString body_;
 
-        version_ = 0;
-        onChanged();
-        return this;
-      }
+        /**
+         * <code>bytes body = 5;</code>
+         *
+         * @return The body.
+         */
+        public com.google.protobuf.ByteString getBody() {
+            return body_;
+        }
 
-      private com.google.protobuf.LazyStringList chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureChainIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          chain_ = new com.google.protobuf.LazyStringArrayList(chain_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @return A list containing the chain.
-       */
-      public com.google.protobuf.ProtocolStringList
-          getChainList() {
-        return chain_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @return The count of chain.
-       */
-      public int getChainCount() {
-        return chain_.size();
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @param index The index of the element to return.
-       * @return The chain at the given index.
-       */
-      public String getChain(int index) {
-        return chain_.get(index);
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @param index The index of the value to return.
-       * @return The bytes of the chain at the given index.
-       */
-      public com.google.protobuf.ByteString
-          getChainBytes(int index) {
-        return chain_.getByteString(index);
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @param index The index to set the value at.
-       * @param value The chain to set.
-       * @return This builder for chaining.
-       */
-      public Builder setChain(
-          int index, String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureChainIsMutable();
-        chain_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @param value The chain to add.
-       * @return This builder for chaining.
-       */
-      public Builder addChain(
-          String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureChainIsMutable();
-        chain_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @param values The chain to add.
-       * @return This builder for chaining.
-       */
-      public Builder addAllChain(
-          Iterable<String> values) {
-        ensureChainIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, chain_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearChain() {
-        chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string chain = 3;</code>
-       * @param value The bytes of the chain to add.
-       * @return This builder for chaining.
-       */
-      public Builder addChainBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureChainIsMutable();
-        chain_.add(value);
-        onChanged();
-        return this;
-      }
+        private byte memoizedIsInitialized = -1;
 
-      private int status_ ;
-      /**
-       * <code>int32 status = 4;</code>
-       * @return The status.
-       */
-      public int getStatus() {
-        return status_;
-      }
-      /**
-       * <code>int32 status = 4;</code>
-       * @param value The status to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStatus(int value) {
+        @Override
+        public final boolean isInitialized() {
+            byte isInitialized = memoizedIsInitialized;
+            if (isInitialized == 1) return true;
+            if (isInitialized == 0) return false;
 
-        status_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 status = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearStatus() {
+            memoizedIsInitialized = 1;
+            return true;
+        }
 
-        status_ = 0;
-        onChanged();
-        return this;
-      }
+        @Override
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                throws java.io.IOException {
+            if (!getUuidBytes().isEmpty()) {
+                com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uuid_);
+            }
+            if (version_ != 0) {
+                output.writeInt32(2, version_);
+            }
+            for (int i = 0; i < chain_.size(); i++) {
+                com.google.protobuf.GeneratedMessageV3.writeString(output, 3, chain_.getRaw(i));
+            }
+            if (status_ != 0) {
+                output.writeInt32(4, status_);
+            }
+            if (!body_.isEmpty()) {
+                output.writeBytes(5, body_);
+            }
+            unknownFields.writeTo(output);
+        }
 
-      private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes body = 5;</code>
-       * @return The body.
-       */
-      public com.google.protobuf.ByteString getBody() {
-        return body_;
-      }
-      /**
-       * <code>bytes body = 5;</code>
-       * @param value The body to set.
-       * @return This builder for chaining.
-       */
-      public Builder setBody(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
+        @Override
+        public int getSerializedSize() {
+            int size = memoizedSize;
+            if (size != -1) return size;
 
-        body_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes body = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearBody() {
+            size = 0;
+            if (!getUuidBytes().isEmpty()) {
+                size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uuid_);
+            }
+            if (version_ != 0) {
+                size += com.google.protobuf.CodedOutputStream
+                        .computeInt32Size(2, version_);
+            }
+            {
+                int dataSize = 0;
+                for (int i = 0; i < chain_.size(); i++) {
+                    dataSize += computeStringSizeNoTag(chain_.getRaw(i));
+                }
+                size += dataSize;
+                size += 1 * getChainList().size();
+            }
+            if (status_ != 0) {
+                size += com.google.protobuf.CodedOutputStream
+                        .computeInt32Size(4, status_);
+            }
+            if (!body_.isEmpty()) {
+                size += com.google.protobuf.CodedOutputStream
+                        .computeBytesSize(5, body_);
+            }
+            size += unknownFields.getSerializedSize();
+            memoizedSize = size;
+            return size;
+        }
 
-        body_ = getDefaultInstance().getBody();
-        onChanged();
-        return this;
-      }
-      @Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
+        @Override
+        public boolean equals(final Object obj) {
+            if (obj == this) {
+                return true;
+            }
+            if (!(obj instanceof ProtocolRespMsg)) {
+                return super.equals(obj);
+            }
+            ProtocolRespMsg other = (ProtocolRespMsg) obj;
 
-      @Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
+            if (!getUuid()
+                    .equals(other.getUuid())) return false;
+            if (getVersion()
+                    != other.getVersion()) return false;
+            if (!getChainList()
+                    .equals(other.getChainList())) return false;
+            if (getStatus()
+                    != other.getStatus()) return false;
+            if (!getBody()
+                    .equals(other.getBody())) return false;
+            if (!unknownFields.equals(other.unknownFields)) return false;
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            if (memoizedHashCode != 0) {
+                return memoizedHashCode;
+            }
+            int hash = 41;
+            hash = (19 * hash) + getDescriptor().hashCode();
+            hash = (37 * hash) + UUID_FIELD_NUMBER;
+            hash = (53 * hash) + getUuid().hashCode();
+            hash = (37 * hash) + VERSION_FIELD_NUMBER;
+            hash = (53 * hash) + getVersion();
+            if (getChainCount() > 0) {
+                hash = (37 * hash) + CHAIN_FIELD_NUMBER;
+                hash = (53 * hash) + getChainList().hashCode();
+            }
+            hash = (37 * hash) + STATUS_FIELD_NUMBER;
+            hash = (53 * hash) + getStatus();
+            hash = (37 * hash) + BODY_FIELD_NUMBER;
+            hash = (53 * hash) + getBody().hashCode();
+            hash = (29 * hash) + unknownFields.hashCode();
+            memoizedHashCode = hash;
+            return hash;
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                java.nio.ByteBuffer data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                java.nio.ByteBuffer data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.ByteString data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.ByteString data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(byte[] data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                byte[] data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseDelimitedFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseDelimitedWithIOException(PARSER, input);
+        }
+
+        public static ProtocolRespMsg parseDelimitedFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.CodedInputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        @Override
+        public Builder newBuilderForType() {
+            return newBuilder();
+        }
+
+        public static Builder newBuilder() {
+            return DEFAULT_INSTANCE.toBuilder();
+        }
+
+        public static Builder newBuilder(ProtocolRespMsg prototype) {
+            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+
+        @Override
+        public Builder toBuilder() {
+            return this == DEFAULT_INSTANCE
+                    ? new Builder() : new Builder().mergeFrom(this);
+        }
+
+        @Override
+        protected Builder newBuilderForType(
+                BuilderParent parent) {
+            Builder builder = new Builder(parent);
+            return builder;
+        }
+
+        /**
+         * Protobuf type {@code ProtocolRespMsg}
+         */
+        public static final class Builder extends
+                com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+                // @@protoc_insertion_point(builder_implements:ProtocolRespMsg)
+                ProtocolRespMsgOrBuilder {
+            public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+                return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
+            }
+
+            @Override
+            protected FieldAccessorTable
+            internalGetFieldAccessorTable() {
+                return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_fieldAccessorTable
+                        .ensureFieldAccessorsInitialized(
+                                ProtocolRespMsg.class, Builder.class);
+            }
+
+            // Construct using cn.bupt.edu.protocol.ProtocolResqMsgProto.ProtocolRespMsg.newBuilder()
+            private Builder() {
+                maybeForceBuilderInitialization();
+            }
+
+            private Builder(
+                    BuilderParent parent) {
+                super(parent);
+                maybeForceBuilderInitialization();
+            }
+
+            private void maybeForceBuilderInitialization() {
+                if (com.google.protobuf.GeneratedMessageV3
+                        .alwaysUseFieldBuilders) {
+                }
+            }
+
+            @Override
+            public Builder clear() {
+                super.clear();
+                uuid_ = "";
+
+                version_ = 0;
+
+                chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+                bitField0_ = (bitField0_ & ~0x00000001);
+                status_ = 0;
+
+                body_ = com.google.protobuf.ByteString.EMPTY;
+
+                return this;
+            }
+
+            @Override
+            public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+                return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
+            }
+
+            @Override
+            public ProtocolRespMsg getDefaultInstanceForType() {
+                return ProtocolRespMsg.getDefaultInstance();
+            }
+
+            @Override
+            public ProtocolRespMsg build() {
+                ProtocolRespMsg result = buildPartial();
+                if (!result.isInitialized()) {
+                    throw newUninitializedMessageException(result);
+                }
+                return result;
+            }
+
+            @Override
+            public ProtocolRespMsg buildPartial() {
+                ProtocolRespMsg result = new ProtocolRespMsg(this);
+                int from_bitField0_ = bitField0_;
+                result.uuid_ = uuid_;
+                result.version_ = version_;
+                if (((bitField0_ & 0x00000001) != 0)) {
+                    chain_ = chain_.getUnmodifiableView();
+                    bitField0_ = (bitField0_ & ~0x00000001);
+                }
+                result.chain_ = chain_;
+                result.status_ = status_;
+                result.body_ = body_;
+                onBuilt();
+                return result;
+            }
+
+            @Override
+            public Builder clone() {
+                return super.clone();
+            }
+
+            @Override
+            public Builder setField(
+                    com.google.protobuf.Descriptors.FieldDescriptor field,
+                    Object value) {
+                return super.setField(field, value);
+            }
+
+            @Override
+            public Builder clearField(
+                    com.google.protobuf.Descriptors.FieldDescriptor field) {
+                return super.clearField(field);
+            }
+
+            @Override
+            public Builder clearOneof(
+                    com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+                return super.clearOneof(oneof);
+            }
+
+            @Override
+            public Builder setRepeatedField(
+                    com.google.protobuf.Descriptors.FieldDescriptor field,
+                    int index, Object value) {
+                return super.setRepeatedField(field, index, value);
+            }
+
+            @Override
+            public Builder addRepeatedField(
+                    com.google.protobuf.Descriptors.FieldDescriptor field,
+                    Object value) {
+                return super.addRepeatedField(field, value);
+            }
+
+            @Override
+            public Builder mergeFrom(com.google.protobuf.Message other) {
+                if (other instanceof ProtocolRespMsg) {
+                    return mergeFrom((ProtocolRespMsg) other);
+                } else {
+                    super.mergeFrom(other);
+                    return this;
+                }
+            }
+
+            public Builder mergeFrom(ProtocolRespMsg other) {
+                if (other == ProtocolRespMsg.getDefaultInstance()) return this;
+                if (!other.getUuid().isEmpty()) {
+                    uuid_ = other.uuid_;
+                    onChanged();
+                }
+                if (other.getVersion() != 0) {
+                    setVersion(other.getVersion());
+                }
+                if (!other.chain_.isEmpty()) {
+                    if (chain_.isEmpty()) {
+                        chain_ = other.chain_;
+                        bitField0_ = (bitField0_ & ~0x00000001);
+                    } else {
+                        ensureChainIsMutable();
+                        chain_.addAll(other.chain_);
+                    }
+                    onChanged();
+                }
+                if (other.getStatus() != 0) {
+                    setStatus(other.getStatus());
+                }
+                if (other.getBody() != com.google.protobuf.ByteString.EMPTY) {
+                    setBody(other.getBody());
+                }
+                this.mergeUnknownFields(other.unknownFields);
+                onChanged();
+                return this;
+            }
+
+            @Override
+            public final boolean isInitialized() {
+                return true;
+            }
+
+            @Override
+            public Builder mergeFrom(
+                    com.google.protobuf.CodedInputStream input,
+                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                    throws java.io.IOException {
+                ProtocolRespMsg parsedMessage = null;
+                try {
+                    parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+                } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                    parsedMessage = (ProtocolRespMsg) e.getUnfinishedMessage();
+                    throw e.unwrapIOException();
+                } finally {
+                    if (parsedMessage != null) {
+                        mergeFrom(parsedMessage);
+                    }
+                }
+                return this;
+            }
+
+            private int bitField0_;
+
+            private Object uuid_ = "";
+
+            /**
+             * <code>string uuid = 1;</code>
+             *
+             * @return The uuid.
+             */
+            public String getUuid() {
+                Object ref = uuid_;
+                if (!(ref instanceof String)) {
+                    com.google.protobuf.ByteString bs =
+                            (com.google.protobuf.ByteString) ref;
+                    String s = bs.toStringUtf8();
+                    uuid_ = s;
+                    return s;
+                } else {
+                    return (String) ref;
+                }
+            }
+
+            /**
+             * <code>string uuid = 1;</code>
+             *
+             * @return The bytes for uuid.
+             */
+            public com.google.protobuf.ByteString
+            getUuidBytes() {
+                Object ref = uuid_;
+                if (ref instanceof String) {
+                    com.google.protobuf.ByteString b =
+                            com.google.protobuf.ByteString.copyFromUtf8(
+                                    (String) ref);
+                    uuid_ = b;
+                    return b;
+                } else {
+                    return (com.google.protobuf.ByteString) ref;
+                }
+            }
+
+            /**
+             * <code>string uuid = 1;</code>
+             *
+             * @param value The uuid to set.
+             * @return This builder for chaining.
+             */
+            public Builder setUuid(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+
+                uuid_ = value;
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>string uuid = 1;</code>
+             *
+             * @return This builder for chaining.
+             */
+            public Builder clearUuid() {
+
+                uuid_ = getDefaultInstance().getUuid();
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>string uuid = 1;</code>
+             *
+             * @param value The bytes for uuid to set.
+             * @return This builder for chaining.
+             */
+            public Builder setUuidBytes(
+                    com.google.protobuf.ByteString value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                checkByteStringIsUtf8(value);
+
+                uuid_ = value;
+                onChanged();
+                return this;
+            }
+
+            private int version_;
+
+            /**
+             * <code>int32 version = 2;</code>
+             *
+             * @return The version.
+             */
+            public int getVersion() {
+                return version_;
+            }
+
+            /**
+             * <code>int32 version = 2;</code>
+             *
+             * @param value The version to set.
+             * @return This builder for chaining.
+             */
+            public Builder setVersion(int value) {
+
+                version_ = value;
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>int32 version = 2;</code>
+             *
+             * @return This builder for chaining.
+             */
+            public Builder clearVersion() {
+
+                version_ = 0;
+                onChanged();
+                return this;
+            }
+
+            private com.google.protobuf.LazyStringList chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+
+            private void ensureChainIsMutable() {
+                if (!((bitField0_ & 0x00000001) != 0)) {
+                    chain_ = new com.google.protobuf.LazyStringArrayList(chain_);
+                    bitField0_ |= 0x00000001;
+                }
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @return A list containing the chain.
+             */
+            public com.google.protobuf.ProtocolStringList
+            getChainList() {
+                return chain_.getUnmodifiableView();
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @return The count of chain.
+             */
+            public int getChainCount() {
+                return chain_.size();
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @param index The index of the element to return.
+             * @return The chain at the given index.
+             */
+            public String getChain(int index) {
+                return chain_.get(index);
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @param index The index of the value to return.
+             * @return The bytes of the chain at the given index.
+             */
+            public com.google.protobuf.ByteString
+            getChainBytes(int index) {
+                return chain_.getByteString(index);
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @param index The index to set the value at.
+             * @param value The chain to set.
+             * @return This builder for chaining.
+             */
+            public Builder setChain(
+                    int index, String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureChainIsMutable();
+                chain_.set(index, value);
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @param value The chain to add.
+             * @return This builder for chaining.
+             */
+            public Builder addChain(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureChainIsMutable();
+                chain_.add(value);
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @param values The chain to add.
+             * @return This builder for chaining.
+             */
+            public Builder addAllChain(
+                    Iterable<String> values) {
+                ensureChainIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, chain_);
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @return This builder for chaining.
+             */
+            public Builder clearChain() {
+                chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+                bitField0_ = (bitField0_ & ~0x00000001);
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>repeated string chain = 3;</code>
+             *
+             * @param value The bytes of the chain to add.
+             * @return This builder for chaining.
+             */
+            public Builder addChainBytes(
+                    com.google.protobuf.ByteString value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                checkByteStringIsUtf8(value);
+                ensureChainIsMutable();
+                chain_.add(value);
+                onChanged();
+                return this;
+            }
+
+            private int status_;
+
+            /**
+             * <code>int32 status = 4;</code>
+             *
+             * @return The status.
+             */
+            public int getStatus() {
+                return status_;
+            }
+
+            /**
+             * <code>int32 status = 4;</code>
+             *
+             * @param value The status to set.
+             * @return This builder for chaining.
+             */
+            public Builder setStatus(int value) {
+
+                status_ = value;
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>int32 status = 4;</code>
+             *
+             * @return This builder for chaining.
+             */
+            public Builder clearStatus() {
+
+                status_ = 0;
+                onChanged();
+                return this;
+            }
+
+            private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
+
+            /**
+             * <code>bytes body = 5;</code>
+             *
+             * @return The body.
+             */
+            public com.google.protobuf.ByteString getBody() {
+                return body_;
+            }
+
+            /**
+             * <code>bytes body = 5;</code>
+             *
+             * @param value The body to set.
+             * @return This builder for chaining.
+             */
+            public Builder setBody(com.google.protobuf.ByteString value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+
+                body_ = value;
+                onChanged();
+                return this;
+            }
+
+            /**
+             * <code>bytes body = 5;</code>
+             *
+             * @return This builder for chaining.
+             */
+            public Builder clearBody() {
+
+                body_ = getDefaultInstance().getBody();
+                onChanged();
+                return this;
+            }
+
+            @Override
+            public final Builder setUnknownFields(
+                    final com.google.protobuf.UnknownFieldSet unknownFields) {
+                return super.setUnknownFields(unknownFields);
+            }
+
+            @Override
+            public final Builder mergeUnknownFields(
+                    final com.google.protobuf.UnknownFieldSet unknownFields) {
+                return super.mergeUnknownFields(unknownFields);
+            }
 
 
-      // @@protoc_insertion_point(builder_scope:ProtocolRespMsg)
+            // @@protoc_insertion_point(builder_scope:ProtocolRespMsg)
+        }
+
+        // @@protoc_insertion_point(class_scope:ProtocolRespMsg)
+        private static final ProtocolRespMsg DEFAULT_INSTANCE;
+
+        static {
+            DEFAULT_INSTANCE = new ProtocolRespMsg();
+        }
+
+        public static ProtocolRespMsg getDefaultInstance() {
+            return DEFAULT_INSTANCE;
+        }
+
+        private static final com.google.protobuf.Parser<ProtocolRespMsg>
+                PARSER = new com.google.protobuf.AbstractParser<ProtocolRespMsg>() {
+            @Override
+            public ProtocolRespMsg parsePartialFrom(
+                    com.google.protobuf.CodedInputStream input,
+                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                    throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ProtocolRespMsg(input, extensionRegistry);
+            }
+        };
+
+        public static com.google.protobuf.Parser<ProtocolRespMsg> parser() {
+            return PARSER;
+        }
+
+        @Override
+        public com.google.protobuf.Parser<ProtocolRespMsg> getParserForType() {
+            return PARSER;
+        }
+
+        @Override
+        public ProtocolRespMsg getDefaultInstanceForType() {
+            return DEFAULT_INSTANCE;
+        }
+
     }
 
-    // @@protoc_insertion_point(class_scope:ProtocolRespMsg)
-    private static final ProtocolRespMsg DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new ProtocolRespMsg();
-    }
-
-    public static ProtocolRespMsg getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ProtocolRespMsg>
-        PARSER = new com.google.protobuf.AbstractParser<ProtocolRespMsg>() {
-      @Override
-      public ProtocolRespMsg parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ProtocolRespMsg(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ProtocolRespMsg> parser() {
-      return PARSER;
-    }
-
-    @Override
-    public com.google.protobuf.Parser<ProtocolRespMsg> getParserForType() {
-      return PARSER;
-    }
-
-    @Override
-    public ProtocolRespMsg getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ProtocolRespMsg_descriptor;
-  private static final
+    private static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_ProtocolRespMsg_descriptor;
+    private static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ProtocolRespMsg_fieldAccessorTable;
+            internal_static_ProtocolRespMsg_fieldAccessorTable;
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    String[] descriptorData = {
-      "\n\025ProtocolRespMsg.proto\"]\n\017ProtocolRespM" +
-      "sg\022\014\n\004uuid\030\001 \001(\t\022\017\n\007version\030\002 \001(\005\022\r\n\005cha" +
-      "in\030\003 \003(\t\022\016\n\006status\030\004 \001(\005\022\014\n\004body\030\005 \001(\014B/" +
-      "\n\024cn.bupt.edu.protocolB\024ProtocolResqMsgP" +
-      "roto\210\001\001b\006proto3"
-    };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        });
-    internal_static_ProtocolRespMsg_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_ProtocolRespMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ProtocolRespMsg_descriptor,
-        new String[] { "Uuid", "Version", "Chain", "Status", "Body", });
-  }
+    public static com.google.protobuf.Descriptors.FileDescriptor
+    getDescriptor() {
+        return descriptor;
+    }
 
-  // @@protoc_insertion_point(outer_class_scope)
+    private static com.google.protobuf.Descriptors.FileDescriptor
+            descriptor;
+
+    static {
+        String[] descriptorData = {
+                "\n\025ProtocolRespMsg.proto\"]\n\017ProtocolRespM" +
+                        "sg\022\014\n\004uuid\030\001 \001(\t\022\017\n\007version\030\002 \001(\005\022\r\n\005cha" +
+                        "in\030\003 \003(\t\022\016\n\006status\030\004 \001(\005\022\014\n\004body\030\005 \001(\014B/" +
+                        "\n\024cn.bupt.edu.protocolB\024ProtocolResqMsgP" +
+                        "roto\210\001\001b\006proto3"
+        };
+        descriptor = com.google.protobuf.Descriptors.FileDescriptor
+                .internalBuildGeneratedFileFrom(descriptorData,
+                        new com.google.protobuf.Descriptors.FileDescriptor[]{
+                        });
+        internal_static_ProtocolRespMsg_descriptor =
+                getDescriptor().getMessageTypes().get(0);
+        internal_static_ProtocolRespMsg_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_ProtocolRespMsg_descriptor,
+                new String[]{"Uuid", "Version", "Chain", "Status", "Body",});
+    }
+
+    // @@protoc_insertion_point(outer_class_scope)
 }

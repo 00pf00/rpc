@@ -10,14 +10,14 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
-        if (msg instanceof ProtocolResqMsgProto.ProtocolRespMsg){
-            ProtocolResqMsgProto.ProtocolRespMsg resp = (ProtocolResqMsgProto.ProtocolRespMsg)msg;
+        if (msg instanceof ProtocolResqMsgProto.ProtocolRespMsg) {
+            ProtocolResqMsgProto.ProtocolRespMsg resp = (ProtocolResqMsgProto.ProtocolRespMsg) msg;
             ParentFutureTask task = ClientTask.getInstance().getTask(resp.getUuid());
             if (task != null) {
-               ClientResp.getInstance().addResp(resp.getUuid(),resp);
+                ClientResp.getInstance().addResp(resp.getUuid(), resp);
                 ClientBlockQueue.clientTask.add(task);
             }
-        }else {
+        } else {
             ctx.fireChannelRead(msg);
         }
 

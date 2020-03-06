@@ -3,10 +3,10 @@ package cn.bupt.edu.thread;
 import java.util.UUID;
 
 public class ParentThread extends Thread {
-    private  String[] chains ;
-    private  String uuid ;
-    private  int version;
-    private  Runnable tr;
+    private String[] chains;
+    private String uuid;
+    private int version;
+    private Runnable tr;
 
     public ParentThread(Runnable r) {
         chains = new String[3];
@@ -27,11 +27,11 @@ public class ParentThread extends Thread {
         this.chains = chains;
     }
 
-    public  String getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public  void setUuid(String uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

@@ -8,7 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class DecodeHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf resp = (ByteBuf)msg;
+        ByteBuf resp = (ByteBuf) msg;
         byte[] rb = new byte[resp.readableBytes()];
         resp.readBytes(rb);
         ProtocolReqMsgProto.ProtocolReqMsg req = ProtocolReqMsgProto.ProtocolReqMsg.parseFrom(rb);

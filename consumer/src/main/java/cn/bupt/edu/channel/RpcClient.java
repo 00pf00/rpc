@@ -7,9 +7,9 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 
 public class RpcClient {
-    private static Channel ch ;
+    private static Channel ch;
 
-    public static void Start(){
+    public static void Start() {
         try {
             ClientThreadPool.initThreadPool();
             ChannelFuture future = ChannelClinet.getChannelFuture();
@@ -19,7 +19,8 @@ public class RpcClient {
             e.printStackTrace();
         }
     }
-    public static Channel getChannel(){
-        return  ch;
+
+    public static Channel getChannel() {
+        return ch;
     }
 }

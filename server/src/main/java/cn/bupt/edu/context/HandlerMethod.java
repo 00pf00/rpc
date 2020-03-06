@@ -6,7 +6,8 @@ public class HandlerMethod {
     public Object object;
     public Method method;
     public String serviceName;
-    public HandlerMethod(Object obj ,Method m,String name){
+
+    public HandlerMethod(Object obj, Method m, String name) {
         this.object = obj;
         this.method = m;
         this.serviceName = name;

@@ -11,7 +11,7 @@ public class ProtocolReqMsg {
         this.version = version;
     }
 
-    public byte[] Encode(){
+    public byte[] Encode() {
         return new byte[]{};
     }
 }

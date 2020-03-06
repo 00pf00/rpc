@@ -1,4 +1,4 @@
 package cn.bupt.edu.controller;
 
-public class HandlerController  {
+public class HandlerController {
 }

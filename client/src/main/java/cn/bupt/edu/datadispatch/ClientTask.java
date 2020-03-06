@@ -7,19 +7,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClientTask {
     private static ClientTask task;
     private ConcurrentHashMap<String, ParentFutureTask> taskMap;
-    public static ClientTask getInstance(){
-        if (task == null){
+
+    public static ClientTask getInstance() {
+        if (task == null) {
             task = new ClientTask();
-            task.taskMap  = new ConcurrentHashMap<String,ParentFutureTask>();
+            task.taskMap = new ConcurrentHashMap<String, ParentFutureTask>();
         }
         return task;
     }
 
-    public ParentFutureTask getTask(String uuid){
+    public ParentFutureTask getTask(String uuid) {
         return taskMap.get(uuid);
     }
-    public void putTask(String uuid, ParentFutureTask task){
-        taskMap.put(uuid,task);
+
+    public void putTask(String uuid, ParentFutureTask task) {
+        taskMap.put(uuid, task);
     }
 
 }

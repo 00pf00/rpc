@@ -3,7 +3,7 @@ option java_generic_services = true;
 option java_package = "cn.bupt.edu.entity";
 option java_outer_classname = "DeviceInfoProto";
 
-message DeviceInfo{
+message DeviceInfo {
     string id = 1;
     string name = 2;
     int32 temperature = 3;

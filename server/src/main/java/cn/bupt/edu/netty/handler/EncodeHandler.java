@@ -11,12 +11,12 @@ import io.netty.channel.ChannelPromise;
 public class EncodeHandler extends ChannelOutboundHandlerAdapter {
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         if (msg instanceof ProtocolResqMsgProto.ProtocolRespMsg) {
-            ProtocolResqMsgProto.ProtocolRespMsg resp = (ProtocolResqMsgProto.ProtocolRespMsg)msg;
+            ProtocolResqMsgProto.ProtocolRespMsg resp = (ProtocolResqMsgProto.ProtocolRespMsg) msg;
             byte[] rb = resp.toByteArray();
             ByteBuf buf = Unpooled.buffer(rb.length);
             buf.writeBytes(rb);
-            ctx.write(buf,promise);
-        }else {
+            ctx.write(buf, promise);
+        } else {
             ctx.write(msg, promise);
         }
     }

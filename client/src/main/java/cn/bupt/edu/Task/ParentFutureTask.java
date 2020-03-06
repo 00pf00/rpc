@@ -10,16 +10,18 @@ import java.util.concurrent.FutureTask;
 
 public class ParentFutureTask extends FutureTask<Object> {
     private ProtocolResqMsgProto.ProtocolRespMsg resp;
+
     public ParentFutureTask(Callable<Object> callable) {
         super(callable);
     }
+
     public Object get() throws InterruptedException, ExecutionException {
         Object result = super.get();
         Thread thread = Thread.currentThread();
-        if (thread instanceof ParentThread){
-            ParentThread pt = (ParentThread)thread;
+        if (thread instanceof ParentThread) {
+            ParentThread pt = (ParentThread) thread;
             String[] chains = pt.getChains();
-            for (int i = 0 ; i < resp.getChainCount();i++){
+            for (int i = 0; i < resp.getChainCount(); i++) {
                 chains[i] = resp.getChain(i);
             }
         }

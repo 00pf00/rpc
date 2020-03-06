@@ -7,6 +7,7 @@ import java.util.concurrent.FutureTask;
 
 public class BlockQueue {
     public static ArrayBlockingQueue<Runnable> tasks = new ArrayBlockingQueue<Runnable>(10);
+
     public static void Add(FutureTask<Void> task) {
         tasks.add(task);
     }
