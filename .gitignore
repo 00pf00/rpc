@@ -2,3 +2,10 @@
 rpc.iml
 /client/target/
 /server/target/
+/client/client.iml
+/server/server.iml
+/consumer/consumer.iml
+/provider/provider.iml
+/base/base.iml
+/base/target/
+/consumer/target/

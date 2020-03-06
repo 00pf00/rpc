@@ -1,33 +1,45 @@
 package cn.bupt.edu.netty.handler;
 
 
-import cn.bupt.edu.netty.consumer.QueueConsumer;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
+import cn.bupt.edu.blockqueue.BlockQueue;
+import cn.bupt.edu.protocol.ProtocolReqMsgProto;
+import cn.bupt.edu.task.ParentTask;
+import cn.bupt.edu.task.TaskFactory;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.IdleStateEvent;
+
+import java.util.concurrent.FutureTask;
 
 public class Serverhandler extends ChannelInboundHandlerAdapter {
+    private FutureTask<Void>[] flist;
+
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
-        ByteBuf buf = (ByteBuf)msg;
-        int len = buf.readableBytes();
-        byte[] cli = new byte[len];
-        buf.readBytes(cli);
-        System.out.println(new String(cli));
-        ByteBuf server = Unpooled.buffer(1);
-        server.writeBytes(new byte[]{'b'});
-        ctx.write(server);
-        //Channel ch = ctx.channel();
-        //QueueConsumer.channels.add(ch);
+        if (msg instanceof ProtocolReqMsgProto.ProtocolReqMsg) {
+            ParentTask task = TaskFactory.GetTask((ProtocolReqMsgProto.ProtocolReqMsg) msg, ctx);
+            FutureTask<Void> ftask = new FutureTask<Void>(task, null);
+            BlockQueue.Add(ftask);
+            for (int i = 0; i < flist.length; i++) {
+                if (flist[i].isDone()) {
+                    flist[i] = ftask;
+                }
+            }
+        } else {
+            ctx.fireChannelRead(msg);
+        }
+
     }
 
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
-
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof IdleStateEvent) {
+            for (FutureTask<Void> f : this.flist) {
+                if (!f.isDone()) {
+                    f.cancel(true);
+                }
+            }
+        }
         ctx.close();
     }
+
 }

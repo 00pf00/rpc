@@ -11,6 +11,9 @@
     <modules>
         <module>server</module>
         <module>client</module>
+        <module>consumer</module>
+        <module>provider</module>
+        <module>base</module>
     </modules>
 
     <parent>
@@ -20,6 +23,7 @@
     </parent>
 
     <dependencies>
+        <!-- Middleware -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -43,6 +47,13 @@
             <artifactId>netty-handler</artifactId>
             <version>4.1.41.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.11.4</version>
+        </dependency>
+
+        <!--consumer provider-->
     </dependencies>
 
     <properties>

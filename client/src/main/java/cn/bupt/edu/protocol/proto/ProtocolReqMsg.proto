@@ -1,0 +1,11 @@
+syntax = "proto3";
+option java_generic_services = true;
+option java_package = "cn.bupt.edu.protocol";
+option java_outer_classname = "ProtocolReqMsgProto";
+message ProtocolReqMsg {
+    string uuid = 1;
+    int32 version = 2;
+    repeated string chain = 3;
+    string path = 4;
+    bytes body = 5;
+}
