@@ -4,6 +4,33 @@
 package cn.bupt.edu.entity;
 
 public final class DeviceInfoProto {
+    private static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_DeviceInfo_descriptor;
+    private static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_DeviceInfo_fieldAccessorTable;
+    private static com.google.protobuf.Descriptors.FileDescriptor
+            descriptor;
+
+    static {
+        String[] descriptorData = {
+                "\n\020DeviceInfo.proto\";\n\nDeviceInfo\022\n\n\002id\030\001" +
+                        " \001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013temperature\030\003 \001(\005B" +
+                        "(\n\022cn.bupt.edu.entityB\017DeviceInfoProto\210\001" +
+                        "\001b\006proto3"
+        };
+        descriptor = com.google.protobuf.Descriptors.FileDescriptor
+                .internalBuildGeneratedFileFrom(descriptorData,
+                        new com.google.protobuf.Descriptors.FileDescriptor[]{
+                        });
+        internal_static_DeviceInfo_descriptor =
+                getDescriptor().getMessageTypes().get(0);
+        internal_static_DeviceInfo_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_DeviceInfo_descriptor,
+                new String[]{"Id", "Name", "Temperature",});
+    }
+
     private DeviceInfoProto() {
     }
 
@@ -15,6 +42,11 @@ public final class DeviceInfoProto {
             com.google.protobuf.ExtensionRegistry registry) {
         registerAllExtensions(
                 (com.google.protobuf.ExtensionRegistryLite) registry);
+    }
+
+    public static com.google.protobuf.Descriptors.FileDescriptor
+    getDescriptor() {
+        return descriptor;
     }
 
     public interface DeviceInfoOrBuilder extends
@@ -66,7 +98,31 @@ public final class DeviceInfoProto {
             com.google.protobuf.GeneratedMessageV3 implements
             // @@protoc_insertion_point(message_implements:DeviceInfo)
             DeviceInfoOrBuilder {
+        public static final int ID_FIELD_NUMBER = 1;
+        public static final int NAME_FIELD_NUMBER = 2;
+        public static final int TEMPERATURE_FIELD_NUMBER = 3;
         private static final long serialVersionUID = 0L;
+        // @@protoc_insertion_point(class_scope:DeviceInfo)
+        private static final DeviceInfo DEFAULT_INSTANCE;
+        private static final com.google.protobuf.Parser<DeviceInfo>
+                PARSER = new com.google.protobuf.AbstractParser<DeviceInfo>() {
+            @Override
+            public DeviceInfo parsePartialFrom(
+                    com.google.protobuf.CodedInputStream input,
+                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                    throws com.google.protobuf.InvalidProtocolBufferException {
+                return new DeviceInfo(input, extensionRegistry);
+            }
+        };
+
+        static {
+            DEFAULT_INSTANCE = new DeviceInfo();
+        }
+
+        private volatile Object id_;
+        private volatile Object name_;
+        private int temperature_;
+        private byte memoizedIsInitialized = -1;
 
         // Use DeviceInfo.newBuilder() to construct.
         private DeviceInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
@@ -77,20 +133,6 @@ public final class DeviceInfoProto {
             id_ = "";
             name_ = "";
         }
-
-        @Override
-        @SuppressWarnings({"unused"})
-        protected Object newInstance(
-                UnusedPrivateParameter unused) {
-            return new DeviceInfo();
-        }
-
-        @Override
-        public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-            return this.unknownFields;
-        }
-
         private DeviceInfo(
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -151,6 +193,116 @@ public final class DeviceInfoProto {
             return DeviceInfoProto.internal_static_DeviceInfo_descriptor;
         }
 
+        public static DeviceInfo parseFrom(
+                java.nio.ByteBuffer data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static DeviceInfo parseFrom(
+                java.nio.ByteBuffer data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static DeviceInfo parseFrom(
+                com.google.protobuf.ByteString data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static DeviceInfo parseFrom(
+                com.google.protobuf.ByteString data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static DeviceInfo parseFrom(byte[] data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static DeviceInfo parseFrom(
+                byte[] data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static DeviceInfo parseFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static DeviceInfo parseFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static DeviceInfo parseDelimitedFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseDelimitedWithIOException(PARSER, input);
+        }
+
+        public static DeviceInfo parseDelimitedFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static DeviceInfo parseFrom(
+                com.google.protobuf.CodedInputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static DeviceInfo parseFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() {
+            return DEFAULT_INSTANCE.toBuilder();
+        }
+
+        public static Builder newBuilder(DeviceInfo prototype) {
+            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+
+        public static DeviceInfo getDefaultInstance() {
+            return DEFAULT_INSTANCE;
+        }
+
+        public static com.google.protobuf.Parser<DeviceInfo> parser() {
+            return PARSER;
+        }
+
+        @Override
+        @SuppressWarnings({"unused"})
+        protected Object newInstance(
+                UnusedPrivateParameter unused) {
+            return new DeviceInfo();
+        }
+
+        @Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+            return this.unknownFields;
+        }
+
         @Override
         protected FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -158,9 +310,6 @@ public final class DeviceInfoProto {
                     .ensureFieldAccessorsInitialized(
                             DeviceInfo.class, Builder.class);
         }
-
-        public static final int ID_FIELD_NUMBER = 1;
-        private volatile Object id_;
 
         /**
          * <code>string id = 1;</code>
@@ -199,9 +348,6 @@ public final class DeviceInfoProto {
             }
         }
 
-        public static final int NAME_FIELD_NUMBER = 2;
-        private volatile Object name_;
-
         /**
          * <code>string name = 2;</code>
          *
@@ -239,9 +385,6 @@ public final class DeviceInfoProto {
             }
         }
 
-        public static final int TEMPERATURE_FIELD_NUMBER = 3;
-        private int temperature_;
-
         /**
          * <code>int32 temperature = 3;</code>
          *
@@ -250,8 +393,6 @@ public final class DeviceInfoProto {
         public int getTemperature() {
             return temperature_;
         }
-
-        private byte memoizedIsInitialized = -1;
 
         @Override
         public final boolean isInitialized() {
@@ -337,98 +478,9 @@ public final class DeviceInfoProto {
             return hash;
         }
 
-        public static DeviceInfo parseFrom(
-                java.nio.ByteBuffer data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static DeviceInfo parseFrom(
-                java.nio.ByteBuffer data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static DeviceInfo parseFrom(
-                com.google.protobuf.ByteString data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static DeviceInfo parseFrom(
-                com.google.protobuf.ByteString data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static DeviceInfo parseFrom(byte[] data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static DeviceInfo parseFrom(
-                byte[] data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static DeviceInfo parseFrom(java.io.InputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input);
-        }
-
-        public static DeviceInfo parseFrom(
-                java.io.InputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public static DeviceInfo parseDelimitedFrom(java.io.InputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseDelimitedWithIOException(PARSER, input);
-        }
-
-        public static DeviceInfo parseDelimitedFrom(
-                java.io.InputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public static DeviceInfo parseFrom(
-                com.google.protobuf.CodedInputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input);
-        }
-
-        public static DeviceInfo parseFrom(
-                com.google.protobuf.CodedInputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
         @Override
         public Builder newBuilderForType() {
             return newBuilder();
-        }
-
-        public static Builder newBuilder() {
-            return DEFAULT_INSTANCE.toBuilder();
-        }
-
-        public static Builder newBuilder(DeviceInfo prototype) {
-            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
         }
 
         @Override
@@ -444,6 +496,16 @@ public final class DeviceInfoProto {
             return builder;
         }
 
+        @Override
+        public com.google.protobuf.Parser<DeviceInfo> getParserForType() {
+            return PARSER;
+        }
+
+        @Override
+        public DeviceInfo getDefaultInstanceForType() {
+            return DEFAULT_INSTANCE;
+        }
+
         /**
          * Protobuf type {@code DeviceInfo}
          */
@@ -451,6 +513,21 @@ public final class DeviceInfoProto {
                 com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
                 // @@protoc_insertion_point(builder_implements:DeviceInfo)
                 DeviceInfoOrBuilder {
+            private Object id_ = "";
+            private Object name_ = "";
+            private int temperature_;
+
+            // Construct using cn.bupt.edu.entity.DeviceInfoProto.DeviceInfo.newBuilder()
+            private Builder() {
+                maybeForceBuilderInitialization();
+            }
+
+            private Builder(
+                    BuilderParent parent) {
+                super(parent);
+                maybeForceBuilderInitialization();
+            }
+
             public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
                 return DeviceInfoProto.internal_static_DeviceInfo_descriptor;
@@ -462,17 +539,6 @@ public final class DeviceInfoProto {
                 return DeviceInfoProto.internal_static_DeviceInfo_fieldAccessorTable
                         .ensureFieldAccessorsInitialized(
                                 DeviceInfo.class, Builder.class);
-            }
-
-            // Construct using cn.bupt.edu.entity.DeviceInfoProto.DeviceInfo.newBuilder()
-            private Builder() {
-                maybeForceBuilderInitialization();
-            }
-
-            private Builder(
-                    BuilderParent parent) {
-                super(parent);
-                maybeForceBuilderInitialization();
             }
 
             private void maybeForceBuilderInitialization() {
@@ -613,8 +679,6 @@ public final class DeviceInfoProto {
                 return this;
             }
 
-            private Object id_ = "";
-
             /**
              * <code>string id = 1;</code>
              *
@@ -631,6 +695,23 @@ public final class DeviceInfoProto {
                 } else {
                     return (String) ref;
                 }
+            }
+
+            /**
+             * <code>string id = 1;</code>
+             *
+             * @param value The id to set.
+             * @return This builder for chaining.
+             */
+            public Builder setId(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+
+                id_ = value;
+                onChanged();
+                return this;
             }
 
             /**
@@ -655,14 +736,15 @@ public final class DeviceInfoProto {
             /**
              * <code>string id = 1;</code>
              *
-             * @param value The id to set.
+             * @param value The bytes for id to set.
              * @return This builder for chaining.
              */
-            public Builder setId(
-                    String value) {
+            public Builder setIdBytes(
+                    com.google.protobuf.ByteString value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
+                checkByteStringIsUtf8(value);
 
                 id_ = value;
                 onChanged();
@@ -682,26 +764,6 @@ public final class DeviceInfoProto {
             }
 
             /**
-             * <code>string id = 1;</code>
-             *
-             * @param value The bytes for id to set.
-             * @return This builder for chaining.
-             */
-            public Builder setIdBytes(
-                    com.google.protobuf.ByteString value) {
-                if (value == null) {
-                    throw new NullPointerException();
-                }
-                checkByteStringIsUtf8(value);
-
-                id_ = value;
-                onChanged();
-                return this;
-            }
-
-            private Object name_ = "";
-
-            /**
              * <code>string name = 2;</code>
              *
              * @return The name.
@@ -717,6 +779,23 @@ public final class DeviceInfoProto {
                 } else {
                     return (String) ref;
                 }
+            }
+
+            /**
+             * <code>string name = 2;</code>
+             *
+             * @param value The name to set.
+             * @return This builder for chaining.
+             */
+            public Builder setName(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+
+                name_ = value;
+                onChanged();
+                return this;
             }
 
             /**
@@ -741,14 +820,15 @@ public final class DeviceInfoProto {
             /**
              * <code>string name = 2;</code>
              *
-             * @param value The name to set.
+             * @param value The bytes for name to set.
              * @return This builder for chaining.
              */
-            public Builder setName(
-                    String value) {
+            public Builder setNameBytes(
+                    com.google.protobuf.ByteString value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
+                checkByteStringIsUtf8(value);
 
                 name_ = value;
                 onChanged();
@@ -766,26 +846,6 @@ public final class DeviceInfoProto {
                 onChanged();
                 return this;
             }
-
-            /**
-             * <code>string name = 2;</code>
-             *
-             * @param value The bytes for name to set.
-             * @return This builder for chaining.
-             */
-            public Builder setNameBytes(
-                    com.google.protobuf.ByteString value) {
-                if (value == null) {
-                    throw new NullPointerException();
-                }
-                checkByteStringIsUtf8(value);
-
-                name_ = value;
-                onChanged();
-                return this;
-            }
-
-            private int temperature_;
 
             /**
              * <code>int32 temperature = 3;</code>
@@ -837,75 +897,6 @@ public final class DeviceInfoProto {
             // @@protoc_insertion_point(builder_scope:DeviceInfo)
         }
 
-        // @@protoc_insertion_point(class_scope:DeviceInfo)
-        private static final DeviceInfo DEFAULT_INSTANCE;
-
-        static {
-            DEFAULT_INSTANCE = new DeviceInfo();
-        }
-
-        public static DeviceInfo getDefaultInstance() {
-            return DEFAULT_INSTANCE;
-        }
-
-        private static final com.google.protobuf.Parser<DeviceInfo>
-                PARSER = new com.google.protobuf.AbstractParser<DeviceInfo>() {
-            @Override
-            public DeviceInfo parsePartialFrom(
-                    com.google.protobuf.CodedInputStream input,
-                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                    throws com.google.protobuf.InvalidProtocolBufferException {
-                return new DeviceInfo(input, extensionRegistry);
-            }
-        };
-
-        public static com.google.protobuf.Parser<DeviceInfo> parser() {
-            return PARSER;
-        }
-
-        @Override
-        public com.google.protobuf.Parser<DeviceInfo> getParserForType() {
-            return PARSER;
-        }
-
-        @Override
-        public DeviceInfo getDefaultInstanceForType() {
-            return DEFAULT_INSTANCE;
-        }
-
-    }
-
-    private static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_DeviceInfo_descriptor;
-    private static final
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_DeviceInfo_fieldAccessorTable;
-
-    public static com.google.protobuf.Descriptors.FileDescriptor
-    getDescriptor() {
-        return descriptor;
-    }
-
-    private static com.google.protobuf.Descriptors.FileDescriptor
-            descriptor;
-
-    static {
-        String[] descriptorData = {
-                "\n\020DeviceInfo.proto\";\n\nDeviceInfo\022\n\n\002id\030\001" +
-                        " \001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013temperature\030\003 \001(\005B" +
-                        "(\n\022cn.bupt.edu.entityB\017DeviceInfoProto\210\001" +
-                        "\001b\006proto3"
-        };
-        descriptor = com.google.protobuf.Descriptors.FileDescriptor
-                .internalBuildGeneratedFileFrom(descriptorData,
-                        new com.google.protobuf.Descriptors.FileDescriptor[]{
-                        });
-        internal_static_DeviceInfo_descriptor =
-                getDescriptor().getMessageTypes().get(0);
-        internal_static_DeviceInfo_fieldAccessorTable = new
-                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_DeviceInfo_descriptor,
-                new String[]{"Id", "Name", "Temperature",});
     }
 
     // @@protoc_insertion_point(outer_class_scope)

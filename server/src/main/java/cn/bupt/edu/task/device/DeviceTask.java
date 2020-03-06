@@ -4,10 +4,10 @@ import cn.bupt.edu.context.HandlerMethod;
 import cn.bupt.edu.context.handlerContext.TaskContext;
 import cn.bupt.edu.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.protocol.ProtocolResqMsgProto;
+import cn.bupt.edu.task.ParentTask;
 import cn.bupt.edu.thread.ParentThread;
 import com.google.protobuf.ByteString;
 import io.netty.channel.ChannelHandlerContext;
-import cn.bupt.edu.task.ParentTask;
 
 public class DeviceTask extends ParentTask {
     public DeviceTask(ProtocolReqMsgProto.ProtocolReqMsg r, ChannelHandlerContext c) {

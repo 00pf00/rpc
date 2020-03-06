@@ -12,7 +12,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 import java.util.concurrent.FutureTask;
 
 public class Serverhandler extends ChannelInboundHandlerAdapter {
-    private FutureTask<Void>[] flist;
+    private FutureTask<Void>[] flist = new FutureTask[100];
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
         if (msg instanceof ProtocolReqMsgProto.ProtocolReqMsg) {
@@ -20,7 +20,7 @@ public class Serverhandler extends ChannelInboundHandlerAdapter {
             FutureTask<Void> ftask = new FutureTask<Void>(task, null);
             BlockQueue.Add(ftask);
             for (int i = 0; i < flist.length; i++) {
-                if (flist[i].isDone()) {
+                if (flist[i] == null || flist[i].isDone()) {
                     flist[i] = ftask;
                 }
             }

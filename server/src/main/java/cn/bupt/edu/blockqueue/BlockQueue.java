@@ -1,7 +1,5 @@
 package cn.bupt.edu.blockqueue;
 
-import cn.bupt.edu.task.ParentTask;
-
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.FutureTask;
 

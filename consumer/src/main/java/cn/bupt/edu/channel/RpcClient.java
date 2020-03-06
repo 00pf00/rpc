@@ -2,7 +2,6 @@ package cn.bupt.edu.channel;
 
 import cn.bupt.edu.ChannelClinet;
 import cn.bupt.edu.threadpool.ClientThreadPool;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 

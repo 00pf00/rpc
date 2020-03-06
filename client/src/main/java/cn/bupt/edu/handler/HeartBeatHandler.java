@@ -7,7 +7,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.ReadTimeoutException;
 
@@ -21,26 +20,6 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     public HeartBeatHandler(int end) {
         this.count = end;
-    }
-
-    class HeartBeatTask implements Runnable {
-        private ChannelHandlerContext ctx;
-        private String version;
-
-        public HeartBeatTask(ChannelHandlerContext cctx, String v) {
-            this.ctx = cctx;
-            this.version = v;
-        }
-
-        @Override
-        public void run() {
-            ProtocolReqMsg req = new ProtocolReqMsg();
-            req.setVersion(this.version);
-            byte[] rb = req.Encode();
-            ByteBuf buf = Unpooled.buffer(rb.length);
-            buf.writeBytes(rb);
-            ctx.writeAndFlush(buf);
-        }
     }
 
     @Override
@@ -83,5 +62,25 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     private void reconnect(String p, String i) {
 
+    }
+
+    class HeartBeatTask implements Runnable {
+        private ChannelHandlerContext ctx;
+        private String version;
+
+        public HeartBeatTask(ChannelHandlerContext cctx, String v) {
+            this.ctx = cctx;
+            this.version = v;
+        }
+
+        @Override
+        public void run() {
+            ProtocolReqMsg req = new ProtocolReqMsg();
+            req.setVersion(this.version);
+            byte[] rb = req.Encode();
+            ByteBuf buf = Unpooled.buffer(rb.length);
+            buf.writeBytes(rb);
+            ctx.writeAndFlush(buf);
+        }
     }
 }

@@ -1,13 +1,11 @@
 package cn.bupt.edu.pipline;
 
-import cn.bupt.edu.handler.*;
+import cn.bupt.edu.handler.ClientHandler;
+import cn.bupt.edu.handler.DecodeHandler;
+import cn.bupt.edu.handler.EncodeHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-
-import java.util.concurrent.TimeUnit;
 
 public class ChannelPipelineFactory extends ChannelInitializer<SocketChannel> {
     @Override

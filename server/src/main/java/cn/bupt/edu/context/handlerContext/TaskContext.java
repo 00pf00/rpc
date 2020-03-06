@@ -14,6 +14,14 @@ public class TaskContext implements HandlerContext {
     private static TaskContext ctx;
     private static ConcurrentHashMap<String, ConcurrentHashMap<String, Method>> services;
 
+    public static TaskContext getInstance() {
+        if (ctx == null) {
+            services = new ConcurrentHashMap<>();
+            ctx = new TaskContext();
+        }
+        return ctx;
+    }
+
     @Override
     public void RegisterHandler(Object obj, String path) {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
@@ -57,13 +65,5 @@ public class TaskContext implements HandlerContext {
 //        Object device = SpringContext.getBean("device");
 //        ctx.RegisterHandler(device,"device");
 
-    }
-
-    public static TaskContext getInstance() {
-        if (ctx == null) {
-            services = new ConcurrentHashMap<>();
-            ctx = new TaskContext();
-        }
-        return ctx;
     }
 }

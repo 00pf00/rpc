@@ -4,9 +4,8 @@ package cn.bupt.edu.Thread;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 
-
-import static cn.bupt.edu.blockqueue.BlockQueue.*;
-import static java.util.concurrent.TimeUnit.*;
+import static cn.bupt.edu.blockqueue.BlockQueue.tasks;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class ServerThreadPool {
     private static ExecutorService task;

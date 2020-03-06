@@ -1,7 +1,6 @@
 package cn.bupt.edu;
 
 import cn.bupt.edu.channel.RpcClient;
-import io.netty.channel.ChannelFuture;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

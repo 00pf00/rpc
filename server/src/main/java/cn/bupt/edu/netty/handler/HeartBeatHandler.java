@@ -4,10 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-
-import java.util.concurrent.TimeUnit;
 
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     private int count;
@@ -15,25 +12,6 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     public HeartBeatHandler(int end) {
         this.count = end;
     }
-
-    class HeartBeatTask implements Runnable {
-        private ChannelHandlerContext ctx;
-
-        public HeartBeatTask(ChannelHandlerContext cctx) {
-            this.ctx = cctx;
-        }
-
-        @Override
-        public void run() {
-            ByteBuf buf = Unpooled.buffer(1);
-            buf.writeBytes(new byte[]{'d'});
-            ctx.writeAndFlush(buf);
-        }
-    }
-
-//    public void channelActive(ChannelHandlerContext ctx) throws InterruptedException {
-//        ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx), 0, 1, TimeUnit.SECONDS);
-//    }
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
         ByteBuf buf = (ByteBuf) msg;
@@ -57,6 +35,10 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 //        }
     }
 
+//    public void channelActive(ChannelHandlerContext ctx) throws InterruptedException {
+//        ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx), 0, 1, TimeUnit.SECONDS);
+//    }
+
     public void channelReadComplete(ChannelHandlerContext ctx) {
         ctx.flush();
     }
@@ -72,6 +54,21 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             System.out.println(((IdleStateEvent) evt).state());
             //ctx.close();
+        }
+    }
+
+    class HeartBeatTask implements Runnable {
+        private ChannelHandlerContext ctx;
+
+        public HeartBeatTask(ChannelHandlerContext cctx) {
+            this.ctx = cctx;
+        }
+
+        @Override
+        public void run() {
+            ByteBuf buf = Unpooled.buffer(1);
+            buf.writeBytes(new byte[]{'d'});
+            ctx.writeAndFlush(buf);
         }
     }
 }

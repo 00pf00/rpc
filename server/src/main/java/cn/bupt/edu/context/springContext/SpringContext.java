@@ -12,11 +12,6 @@ import java.util.Map;
 public class SpringContext implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringContext.applicationContext = applicationContext;
-    }
-
     public static <T> T getBean(String beanName) {
         if (applicationContext.containsBean(beanName)) {
             return (T) applicationContext.getBean(beanName);
@@ -28,5 +23,10 @@ public class SpringContext implements ApplicationContextAware {
 
     public static <T> Map<String, HandlerController> getBeansOfType(Class<HandlerController> baseType) {
         return applicationContext.getBeansOfType(baseType);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringContext.applicationContext = applicationContext;
     }
 }

@@ -4,6 +4,34 @@
 package cn.bupt.edu.protocol;
 
 public final class ProtocolResqMsgProto {
+    private static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_ProtocolRespMsg_descriptor;
+    private static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_ProtocolRespMsg_fieldAccessorTable;
+    private static com.google.protobuf.Descriptors.FileDescriptor
+            descriptor;
+
+    static {
+        String[] descriptorData = {
+                "\n\025ProtocolRespMsg.proto\"]\n\017ProtocolRespM" +
+                        "sg\022\014\n\004uuid\030\001 \001(\t\022\017\n\007version\030\002 \001(\005\022\r\n\005cha" +
+                        "in\030\003 \003(\t\022\016\n\006status\030\004 \001(\005\022\014\n\004body\030\005 \001(\014B/" +
+                        "\n\024cn.bupt.edu.protocolB\024ProtocolResqMsgP" +
+                        "roto\210\001\001b\006proto3"
+        };
+        descriptor = com.google.protobuf.Descriptors.FileDescriptor
+                .internalBuildGeneratedFileFrom(descriptorData,
+                        new com.google.protobuf.Descriptors.FileDescriptor[]{
+                        });
+        internal_static_ProtocolRespMsg_descriptor =
+                getDescriptor().getMessageTypes().get(0);
+        internal_static_ProtocolRespMsg_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_ProtocolRespMsg_descriptor,
+                new String[]{"Uuid", "Version", "Chain", "Status", "Body",});
+    }
+
     private ProtocolResqMsgProto() {
     }
 
@@ -15,6 +43,11 @@ public final class ProtocolResqMsgProto {
             com.google.protobuf.ExtensionRegistry registry) {
         registerAllExtensions(
                 (com.google.protobuf.ExtensionRegistryLite) registry);
+    }
+
+    public static com.google.protobuf.Descriptors.FileDescriptor
+    getDescriptor() {
+        return descriptor;
     }
 
     public interface ProtocolRespMsgOrBuilder extends
@@ -97,30 +130,44 @@ public final class ProtocolResqMsgProto {
             com.google.protobuf.GeneratedMessageV3 implements
             // @@protoc_insertion_point(message_implements:ProtocolRespMsg)
             ProtocolRespMsgOrBuilder {
+        public static final int UUID_FIELD_NUMBER = 1;
+        public static final int VERSION_FIELD_NUMBER = 2;
+        public static final int CHAIN_FIELD_NUMBER = 3;
+        public static final int STATUS_FIELD_NUMBER = 4;
+        public static final int BODY_FIELD_NUMBER = 5;
         private static final long serialVersionUID = 0L;
+        // @@protoc_insertion_point(class_scope:ProtocolRespMsg)
+        private static final ProtocolRespMsg DEFAULT_INSTANCE;
+        private static final com.google.protobuf.Parser<ProtocolRespMsg>
+                PARSER = new com.google.protobuf.AbstractParser<ProtocolRespMsg>() {
+            @Override
+            public ProtocolRespMsg parsePartialFrom(
+                    com.google.protobuf.CodedInputStream input,
+                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                    throws com.google.protobuf.InvalidProtocolBufferException {
+                return new ProtocolRespMsg(input, extensionRegistry);
+            }
+        };
+
+        static {
+            DEFAULT_INSTANCE = new ProtocolRespMsg();
+        }
+
+        private volatile Object uuid_;
+        private int version_;
+        private com.google.protobuf.LazyStringList chain_;
+        private int status_;
+        private com.google.protobuf.ByteString body_;
+        private byte memoizedIsInitialized = -1;
 
         // Use ProtocolRespMsg.newBuilder() to construct.
         private ProtocolRespMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
             super(builder);
         }
-
         private ProtocolRespMsg() {
             uuid_ = "";
             chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
             body_ = com.google.protobuf.ByteString.EMPTY;
-        }
-
-        @Override
-        @SuppressWarnings({"unused"})
-        protected Object newInstance(
-                UnusedPrivateParameter unused) {
-            return new ProtocolRespMsg();
-        }
-
-        @Override
-        public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-            return this.unknownFields;
         }
 
         private ProtocolRespMsg(
@@ -200,6 +247,116 @@ public final class ProtocolResqMsgProto {
             return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
         }
 
+        public static ProtocolRespMsg parseFrom(
+                java.nio.ByteBuffer data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                java.nio.ByteBuffer data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.ByteString data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.ByteString data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(byte[] data)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                byte[] data,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return PARSER.parseFrom(data, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseDelimitedFrom(java.io.InputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseDelimitedWithIOException(PARSER, input);
+        }
+
+        public static ProtocolRespMsg parseDelimitedFrom(
+                java.io.InputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.CodedInputStream input)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input);
+        }
+
+        public static ProtocolRespMsg parseFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            return com.google.protobuf.GeneratedMessageV3
+                    .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public static Builder newBuilder() {
+            return DEFAULT_INSTANCE.toBuilder();
+        }
+
+        public static Builder newBuilder(ProtocolRespMsg prototype) {
+            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+
+        public static ProtocolRespMsg getDefaultInstance() {
+            return DEFAULT_INSTANCE;
+        }
+
+        public static com.google.protobuf.Parser<ProtocolRespMsg> parser() {
+            return PARSER;
+        }
+
+        @Override
+        @SuppressWarnings({"unused"})
+        protected Object newInstance(
+                UnusedPrivateParameter unused) {
+            return new ProtocolRespMsg();
+        }
+
+        @Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+            return this.unknownFields;
+        }
+
         @Override
         protected FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -207,9 +364,6 @@ public final class ProtocolResqMsgProto {
                     .ensureFieldAccessorsInitialized(
                             ProtocolRespMsg.class, Builder.class);
         }
-
-        public static final int UUID_FIELD_NUMBER = 1;
-        private volatile Object uuid_;
 
         /**
          * <code>string uuid = 1;</code>
@@ -248,9 +402,6 @@ public final class ProtocolResqMsgProto {
             }
         }
 
-        public static final int VERSION_FIELD_NUMBER = 2;
-        private int version_;
-
         /**
          * <code>int32 version = 2;</code>
          *
@@ -259,9 +410,6 @@ public final class ProtocolResqMsgProto {
         public int getVersion() {
             return version_;
         }
-
-        public static final int CHAIN_FIELD_NUMBER = 3;
-        private com.google.protobuf.LazyStringList chain_;
 
         /**
          * <code>repeated string chain = 3;</code>
@@ -303,9 +451,6 @@ public final class ProtocolResqMsgProto {
             return chain_.getByteString(index);
         }
 
-        public static final int STATUS_FIELD_NUMBER = 4;
-        private int status_;
-
         /**
          * <code>int32 status = 4;</code>
          *
@@ -315,9 +460,6 @@ public final class ProtocolResqMsgProto {
             return status_;
         }
 
-        public static final int BODY_FIELD_NUMBER = 5;
-        private com.google.protobuf.ByteString body_;
-
         /**
          * <code>bytes body = 5;</code>
          *
@@ -326,8 +468,6 @@ public final class ProtocolResqMsgProto {
         public com.google.protobuf.ByteString getBody() {
             return body_;
         }
-
-        private byte memoizedIsInitialized = -1;
 
         @Override
         public final boolean isInitialized() {
@@ -442,98 +582,9 @@ public final class ProtocolResqMsgProto {
             return hash;
         }
 
-        public static ProtocolRespMsg parseFrom(
-                java.nio.ByteBuffer data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                java.nio.ByteBuffer data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                com.google.protobuf.ByteString data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                com.google.protobuf.ByteString data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static ProtocolRespMsg parseFrom(byte[] data)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                byte[] data,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return PARSER.parseFrom(data, extensionRegistry);
-        }
-
-        public static ProtocolRespMsg parseFrom(java.io.InputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                java.io.InputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public static ProtocolRespMsg parseDelimitedFrom(java.io.InputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseDelimitedWithIOException(PARSER, input);
-        }
-
-        public static ProtocolRespMsg parseDelimitedFrom(
-                java.io.InputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                com.google.protobuf.CodedInputStream input)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input);
-        }
-
-        public static ProtocolRespMsg parseFrom(
-                com.google.protobuf.CodedInputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            return com.google.protobuf.GeneratedMessageV3
-                    .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
         @Override
         public Builder newBuilderForType() {
             return newBuilder();
-        }
-
-        public static Builder newBuilder() {
-            return DEFAULT_INSTANCE.toBuilder();
-        }
-
-        public static Builder newBuilder(ProtocolRespMsg prototype) {
-            return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
         }
 
         @Override
@@ -549,6 +600,16 @@ public final class ProtocolResqMsgProto {
             return builder;
         }
 
+        @Override
+        public com.google.protobuf.Parser<ProtocolRespMsg> getParserForType() {
+            return PARSER;
+        }
+
+        @Override
+        public ProtocolRespMsg getDefaultInstanceForType() {
+            return DEFAULT_INSTANCE;
+        }
+
         /**
          * Protobuf type {@code ProtocolRespMsg}
          */
@@ -556,6 +617,24 @@ public final class ProtocolResqMsgProto {
                 com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
                 // @@protoc_insertion_point(builder_implements:ProtocolRespMsg)
                 ProtocolRespMsgOrBuilder {
+            private int bitField0_;
+            private Object uuid_ = "";
+            private int version_;
+            private com.google.protobuf.LazyStringList chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+            private int status_;
+            private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
+
+            // Construct using cn.bupt.edu.protocol.ProtocolResqMsgProto.ProtocolRespMsg.newBuilder()
+            private Builder() {
+                maybeForceBuilderInitialization();
+            }
+
+            private Builder(
+                    BuilderParent parent) {
+                super(parent);
+                maybeForceBuilderInitialization();
+            }
+
             public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
                 return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_descriptor;
@@ -567,17 +646,6 @@ public final class ProtocolResqMsgProto {
                 return ProtocolResqMsgProto.internal_static_ProtocolRespMsg_fieldAccessorTable
                         .ensureFieldAccessorsInitialized(
                                 ProtocolRespMsg.class, Builder.class);
-            }
-
-            // Construct using cn.bupt.edu.protocol.ProtocolResqMsgProto.ProtocolRespMsg.newBuilder()
-            private Builder() {
-                maybeForceBuilderInitialization();
-            }
-
-            private Builder(
-                    BuilderParent parent) {
-                super(parent);
-                maybeForceBuilderInitialization();
             }
 
             private void maybeForceBuilderInitialization() {
@@ -741,10 +809,6 @@ public final class ProtocolResqMsgProto {
                 return this;
             }
 
-            private int bitField0_;
-
-            private Object uuid_ = "";
-
             /**
              * <code>string uuid = 1;</code>
              *
@@ -761,6 +825,23 @@ public final class ProtocolResqMsgProto {
                 } else {
                     return (String) ref;
                 }
+            }
+
+            /**
+             * <code>string uuid = 1;</code>
+             *
+             * @param value The uuid to set.
+             * @return This builder for chaining.
+             */
+            public Builder setUuid(
+                    String value) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+
+                uuid_ = value;
+                onChanged();
+                return this;
             }
 
             /**
@@ -785,14 +866,15 @@ public final class ProtocolResqMsgProto {
             /**
              * <code>string uuid = 1;</code>
              *
-             * @param value The uuid to set.
+             * @param value The bytes for uuid to set.
              * @return This builder for chaining.
              */
-            public Builder setUuid(
-                    String value) {
+            public Builder setUuidBytes(
+                    com.google.protobuf.ByteString value) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
+                checkByteStringIsUtf8(value);
 
                 uuid_ = value;
                 onChanged();
@@ -810,26 +892,6 @@ public final class ProtocolResqMsgProto {
                 onChanged();
                 return this;
             }
-
-            /**
-             * <code>string uuid = 1;</code>
-             *
-             * @param value The bytes for uuid to set.
-             * @return This builder for chaining.
-             */
-            public Builder setUuidBytes(
-                    com.google.protobuf.ByteString value) {
-                if (value == null) {
-                    throw new NullPointerException();
-                }
-                checkByteStringIsUtf8(value);
-
-                uuid_ = value;
-                onChanged();
-                return this;
-            }
-
-            private int version_;
 
             /**
              * <code>int32 version = 2;</code>
@@ -864,8 +926,6 @@ public final class ProtocolResqMsgProto {
                 onChanged();
                 return this;
             }
-
-            private com.google.protobuf.LazyStringList chain_ = com.google.protobuf.LazyStringArrayList.EMPTY;
 
             private void ensureChainIsMutable() {
                 if (!((bitField0_ & 0x00000001) != 0)) {
@@ -994,8 +1054,6 @@ public final class ProtocolResqMsgProto {
                 return this;
             }
 
-            private int status_;
-
             /**
              * <code>int32 status = 4;</code>
              *
@@ -1029,8 +1087,6 @@ public final class ProtocolResqMsgProto {
                 onChanged();
                 return this;
             }
-
-            private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
 
             /**
              * <code>bytes body = 5;</code>
@@ -1085,76 +1141,6 @@ public final class ProtocolResqMsgProto {
             // @@protoc_insertion_point(builder_scope:ProtocolRespMsg)
         }
 
-        // @@protoc_insertion_point(class_scope:ProtocolRespMsg)
-        private static final ProtocolRespMsg DEFAULT_INSTANCE;
-
-        static {
-            DEFAULT_INSTANCE = new ProtocolRespMsg();
-        }
-
-        public static ProtocolRespMsg getDefaultInstance() {
-            return DEFAULT_INSTANCE;
-        }
-
-        private static final com.google.protobuf.Parser<ProtocolRespMsg>
-                PARSER = new com.google.protobuf.AbstractParser<ProtocolRespMsg>() {
-            @Override
-            public ProtocolRespMsg parsePartialFrom(
-                    com.google.protobuf.CodedInputStream input,
-                    com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                    throws com.google.protobuf.InvalidProtocolBufferException {
-                return new ProtocolRespMsg(input, extensionRegistry);
-            }
-        };
-
-        public static com.google.protobuf.Parser<ProtocolRespMsg> parser() {
-            return PARSER;
-        }
-
-        @Override
-        public com.google.protobuf.Parser<ProtocolRespMsg> getParserForType() {
-            return PARSER;
-        }
-
-        @Override
-        public ProtocolRespMsg getDefaultInstanceForType() {
-            return DEFAULT_INSTANCE;
-        }
-
-    }
-
-    private static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_ProtocolRespMsg_descriptor;
-    private static final
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_ProtocolRespMsg_fieldAccessorTable;
-
-    public static com.google.protobuf.Descriptors.FileDescriptor
-    getDescriptor() {
-        return descriptor;
-    }
-
-    private static com.google.protobuf.Descriptors.FileDescriptor
-            descriptor;
-
-    static {
-        String[] descriptorData = {
-                "\n\025ProtocolRespMsg.proto\"]\n\017ProtocolRespM" +
-                        "sg\022\014\n\004uuid\030\001 \001(\t\022\017\n\007version\030\002 \001(\005\022\r\n\005cha" +
-                        "in\030\003 \003(\t\022\016\n\006status\030\004 \001(\005\022\014\n\004body\030\005 \001(\014B/" +
-                        "\n\024cn.bupt.edu.protocolB\024ProtocolResqMsgP" +
-                        "roto\210\001\001b\006proto3"
-        };
-        descriptor = com.google.protobuf.Descriptors.FileDescriptor
-                .internalBuildGeneratedFileFrom(descriptorData,
-                        new com.google.protobuf.Descriptors.FileDescriptor[]{
-                        });
-        internal_static_ProtocolRespMsg_descriptor =
-                getDescriptor().getMessageTypes().get(0);
-        internal_static_ProtocolRespMsg_fieldAccessorTable = new
-                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_ProtocolRespMsg_descriptor,
-                new String[]{"Uuid", "Version", "Chain", "Status", "Body",});
     }
 
     // @@protoc_insertion_point(outer_class_scope)

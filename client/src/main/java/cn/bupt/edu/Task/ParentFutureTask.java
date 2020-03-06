@@ -2,7 +2,6 @@ package cn.bupt.edu.Task;
 
 import cn.bupt.edu.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.thread.ParentThread;
-import com.google.protobuf.ByteString;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

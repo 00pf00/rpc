@@ -1,6 +1,5 @@
 package cn.bupt.edu.netty.handler;
 
-import cn.bupt.edu.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.protocol.ProtocolResqMsgProto;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
