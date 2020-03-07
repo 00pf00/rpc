@@ -1,7 +1,5 @@
 package cn.bupt.edu.thread;
 
-import cn.bupt.edu.task.ParentTask;
-
 public class ParentThread extends Thread {
     private String[] chains;
     private String uuid;

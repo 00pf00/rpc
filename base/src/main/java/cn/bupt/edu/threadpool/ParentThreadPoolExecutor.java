@@ -12,6 +12,7 @@ public class ParentThreadPoolExecutor extends ThreadPoolExecutor {
     public ParentThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory);
     }
+
     //执行task任务之前初始化线程
     protected void beforeExecute(Thread t, Runnable r) {
         if (r instanceof ServerFutureTask) {
