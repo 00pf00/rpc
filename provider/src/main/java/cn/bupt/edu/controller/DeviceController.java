@@ -14,7 +14,7 @@ public class DeviceController extends HandlerController {
     @ResponseBody
     public byte[] getDeviceInfo(ByteString device) throws Exception {
         DeviceInfoProto.DeviceInfo deviceInfo = DeviceInfoProto.DeviceInfo.parseFrom(device);
-        System.out.println("device name  = " + deviceInfo.getName() + "\n");
+        this.getLog().info("device name = {}", deviceInfo.getName());
         DeviceInfoProto.DeviceInfo.Builder deviceBuilder = DeviceInfoProto.DeviceInfo.newBuilder();
         deviceBuilder.setId(UUID.randomUUID().toString());
         deviceBuilder.setName("device-2");

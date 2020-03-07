@@ -1,6 +1,6 @@
 package cn.bupt.edu.thread;
 
-import java.util.UUID;
+import cn.bupt.edu.task.ParentTask;
 
 public class ParentThread extends Thread {
     private String[] chains;
@@ -10,8 +10,7 @@ public class ParentThread extends Thread {
 
     public ParentThread(Runnable r) {
         chains = new String[3];
-        uuid = UUID.randomUUID().toString();
-        tr = r;
+        this.tr = r;
     }
 
     @Override

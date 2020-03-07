@@ -3,8 +3,9 @@ package cn.bupt.edu.netty.handler;
 
 import cn.bupt.edu.blockqueue.BlockQueue;
 import cn.bupt.edu.protocol.ProtocolReqMsgProto;
-import cn.bupt.edu.task.ParentTask;
 import cn.bupt.edu.task.TaskFactory;
+import cn.bupt.edu.task.server.ServerFutureTask;
+import cn.bupt.edu.task.server.ServerTask;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -16,8 +17,8 @@ public class Serverhandler extends ChannelInboundHandlerAdapter {
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
         if (msg instanceof ProtocolReqMsgProto.ProtocolReqMsg) {
-            ParentTask task = TaskFactory.GetTask((ProtocolReqMsgProto.ProtocolReqMsg) msg, ctx);
-            FutureTask<Void> ftask = new FutureTask<Void>(task, null);
+            ServerTask task = TaskFactory.GetTask((ProtocolReqMsgProto.ProtocolReqMsg) msg, ctx);
+            ServerFutureTask ftask = new ServerFutureTask(task, null);
             BlockQueue.Add(ftask);
             for (int i = 0; i < flist.length; i++) {
                 if (flist[i] == null || flist[i].isDone()) {

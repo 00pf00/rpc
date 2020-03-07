@@ -9,3 +9,4 @@ rpc.iml
 /base/base.iml
 /base/target/
 /consumer/target/
+/provider/target/

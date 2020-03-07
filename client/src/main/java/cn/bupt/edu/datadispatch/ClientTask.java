@@ -1,26 +1,26 @@
 package cn.bupt.edu.datadispatch;
 
-import cn.bupt.edu.Task.ParentFutureTask;
+import cn.bupt.edu.Task.ClientParentFutureTask;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ClientTask {
     private static ClientTask task;
-    private ConcurrentHashMap<String, ParentFutureTask> taskMap;
+    private ConcurrentHashMap<String, ClientParentFutureTask> taskMap;
 
     public static ClientTask getInstance() {
         if (task == null) {
             task = new ClientTask();
-            task.taskMap = new ConcurrentHashMap<String, ParentFutureTask>();
+            task.taskMap = new ConcurrentHashMap<String, ClientParentFutureTask>();
         }
         return task;
     }
 
-    public ParentFutureTask getTask(String uuid) {
+    public ClientParentFutureTask getTask(String uuid) {
         return taskMap.get(uuid);
     }
 
-    public void putTask(String uuid, ParentFutureTask task) {
+    public void putTask(String uuid, ClientParentFutureTask task) {
         taskMap.put(uuid, task);
     }
 

@@ -2,9 +2,7 @@ package cn.bupt.edu.handler;
 
 import cn.bupt.edu.context.data.DataContext;
 import cn.bupt.edu.dns.ClusterIp;
-import cn.bupt.edu.protocol.ProtocolReqMsg;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -75,12 +73,12 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
-            ProtocolReqMsg req = new ProtocolReqMsg();
-            req.setVersion(this.version);
-            byte[] rb = req.Encode();
-            ByteBuf buf = Unpooled.buffer(rb.length);
-            buf.writeBytes(rb);
-            ctx.writeAndFlush(buf);
+//            ProtocolReqMsg req = new ProtocolReqMsg();
+//            req.setVersion(this.version);
+//            byte[] rb = req.Encode();
+//            ByteBuf buf = Unpooled.buffer(rb.length);
+//            buf.writeBytes(rb);
+//            ctx.writeAndFlush(buf);
         }
     }
 }

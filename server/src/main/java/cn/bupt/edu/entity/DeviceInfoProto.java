@@ -133,6 +133,7 @@ public final class DeviceInfoProto {
             id_ = "";
             name_ = "";
         }
+
         private DeviceInfo(
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)

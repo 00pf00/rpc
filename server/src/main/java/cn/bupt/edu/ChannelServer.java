@@ -12,19 +12,19 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@SpringBootApplication
-public class RpcApplication {
+//@SpringBootApplication
+public class ChannelServer {
+
     static final int PORT = 8100;
+    private static ChannelServer channelServer;
 
     public static void main(String[] args) {
-        SpringApplication.run(RpcApplication.class, args);
-        TaskContext.getInstance().initContext();
-        ServerThreadPool.initThreadPool();
-        NettyServer();
+//        SpringApplication.run(ChannelServer.class, args);
+//        TaskContext.getInstance().initContext();
+//        ServerThreadPool.initThreadPool();
+//        NettyServer();
     }
 
     public static void NettyServer() {
@@ -45,5 +45,18 @@ public class RpcApplication {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ChannelServer getInstance() {
+        if (channelServer == null) {
+            channelServer = new ChannelServer();
+        }
+        return channelServer;
+    }
+
+    public void initChannelServer() {
+        TaskContext.getInstance().initContext();
+        ServerThreadPool.initThreadPool();
+        NettyServer();
     }
 }
