@@ -18,4 +18,11 @@ public class ServerFutureTask extends FutureTask<Void> {
         }
         return null;
     }
+
+    public ServerTask getServerTask() {
+        if (serverTask instanceof ServerTask) {
+            return (ServerTask) serverTask;
+        }
+        return null;
+    }
 }

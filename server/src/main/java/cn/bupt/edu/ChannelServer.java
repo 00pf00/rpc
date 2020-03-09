@@ -56,7 +56,7 @@ public class ChannelServer {
 
     public void initChannelServer() {
         TaskContext.getInstance().initContext();
-        ServerThreadPool.initThreadPool();
+        //ServerThreadPool.initThreadPool();
         NettyServer();
     }
 }
