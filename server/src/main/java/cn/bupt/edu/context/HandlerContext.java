@@ -7,5 +7,7 @@ public interface HandlerContext {
 
     public HandlerMethod GetHandler(String path);
 
+    public void SetHandler(HandlerMethod hm);
+
     public void Handler();
 }

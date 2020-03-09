@@ -30,8 +30,8 @@ public class ServerThreadPool {
 
     public static ExecutorService getExecutorService(String path) {
         String[] paths = path.split("/");
-        if (paths.length >1) {
-            ExecutorService res =  esMap.get(paths[1]);
+        if (paths.length > 1) {
+            ExecutorService res = esMap.get(paths[1]);
             if (res != null) {
                 return res;
             }

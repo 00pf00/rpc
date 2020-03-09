@@ -18,15 +18,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.FutureTask;
 
 public class ServerHandler extends ChannelInboundHandlerAdapter {
-    private FutureTask<Void>[] flist = new FutureTask[100];
     private final static Logger logger = LoggerFactory.getLogger(ServerHandler.class);
+    private FutureTask<Void>[] flist = new FutureTask[100];
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
         if (msg instanceof ProtocolReqMsgProto.ProtocolReqMsg) {
             ProtocolReqMsgProto.ProtocolReqMsg req = (ProtocolReqMsgProto.ProtocolReqMsg) msg;
             ExecutorService es = ServerThreadPool.getExecutorService(req.getPath());
-            if (es == null){
-                logger.error("The server-side processing request thread pool is not initialized path = {}",req.getPath());
+            if (es == null) {
+                logger.error("The server-side processing request thread pool is not initialized path = {}", req.getPath());
                 //将错误返回到client端
                 ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
                 builder.setUuid(req.getUuid());
@@ -34,7 +34,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 builder.addAllChain(req.getChainList());
                 builder.setStatus(Status.STATUS_NOTINIT);
                 ctx.writeAndFlush(builder.build());
-            }else {
+            } else {
                 ServerTask task = TaskFactory.GetTask(req, ctx);
                 ServerFutureTask ftask = new ServerFutureTask(task, null);
                 es.execute(ftask);

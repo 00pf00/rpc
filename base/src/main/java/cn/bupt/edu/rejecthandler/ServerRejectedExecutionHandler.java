@@ -5,7 +5,6 @@ import cn.bupt.edu.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.task.server.ServerFutureTask;
 import cn.bupt.edu.task.server.ServerTask;
 import cn.bupt.edu.util.Status;
-import io.netty.channel.ChannelHandlerContext;
 
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -13,8 +12,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ServerRejectedExecutionHandler implements RejectedExecutionHandler {
     @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-        if (r instanceof ServerFutureTask){
-            ServerFutureTask sft = (ServerFutureTask)r;
+        if (r instanceof ServerFutureTask) {
+            ServerFutureTask sft = (ServerFutureTask) r;
             ServerTask st = sft.getServerTask();
             ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
             builder.setUuid(st.Req.getUuid());

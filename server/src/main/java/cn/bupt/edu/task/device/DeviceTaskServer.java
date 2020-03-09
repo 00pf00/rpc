@@ -30,6 +30,7 @@ public class DeviceTaskServer extends ServerTask {
             builder.setStatus(500);
             e.printStackTrace();
         } finally {
+            TaskContext.getInstance().SetHandler(hm);
             ParentThread p = super.getThread();
             String[] chains = p.getChains();
             for (int i = 0; i < chains.length; i++) {
