@@ -10,3 +10,4 @@ rpc.iml
 /base/target/
 /consumer/target/
 /provider/target/
+/chains/chains.iml
