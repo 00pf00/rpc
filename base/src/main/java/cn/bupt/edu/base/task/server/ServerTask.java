@@ -1,9 +1,9 @@
 package cn.bupt.edu.base.task.server;
 
+import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.base.task.AbstractParentTask;
 import cn.bupt.edu.base.task.ParentTask;
 import cn.bupt.edu.base.thread.ParentThread;
-import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,6 @@
 package cn.bupt.edu.base.threadpool;
 
-import cn.bupt.edu.base.task.ParentTask;
-import cn.bupt.edu.base.task.server.ServerFutureTask;
+import cn.bupt.edu.base.task.ParentFutureTask;
 
 import java.util.concurrent.*;
 
@@ -16,12 +15,9 @@ public class ParentThreadPoolExecutor extends ThreadPoolExecutor {
 
     //执行task任务之前初始化线程
     protected void beforeExecute(Thread t, Runnable r) {
-        if (r instanceof ServerFutureTask) {
-            ServerFutureTask spf = (ServerFutureTask) r;
-            ParentTask srt = spf.getParentTask();
-            if (srt != null) {
-                srt.initThread();
-            }
+        if (r instanceof ParentFutureTask) {
+            ParentFutureTask pft = (ParentFutureTask) r;
+            pft.initThread();
         }
     }
 }

@@ -1,10 +1,11 @@
 package cn.bupt.edu.base.task.server;
 
+import cn.bupt.edu.base.task.ParentFutureTask;
 import cn.bupt.edu.base.task.ParentTask;
 
 import java.util.concurrent.FutureTask;
 
-public class ServerFutureTask extends FutureTask<Void> {
+public class ServerFutureTask extends FutureTask<Void> implements ParentFutureTask {
     private Runnable serverTask;
 
     public ServerFutureTask(Runnable runnable, Void result) {
@@ -24,5 +25,10 @@ public class ServerFutureTask extends FutureTask<Void> {
             return (ServerTask) serverTask;
         }
         return null;
+    }
+
+    @Override
+    public void initThread() {
+        getServerTask().initThread();
     }
 }

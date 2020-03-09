@@ -1,5 +1,8 @@
 package cn.bupt.edu.base.threadpool;
 
+import cn.bupt.edu.base.task.ParentTask;
+import cn.bupt.edu.base.task.server.ServerFutureTask;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
@@ -14,5 +17,15 @@ public class ServerThreadPoolExecutor extends ParentThreadPoolExecutor {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory);
     }
 
+    //执行task任务之前初始化线程
+    protected void beforeExecute(Thread t, Runnable r) {
+        if (r instanceof ServerFutureTask) {
+            ServerFutureTask spf = (ServerFutureTask) r;
+            ParentTask srt = spf.getParentTask();
+            if (srt != null) {
+                srt.initThread();
+            }
+        }
+    }
 
 }

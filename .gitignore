@@ -11,3 +11,4 @@ rpc.iml
 /consumer/target/
 /provider/target/
 /chains/chains.iml
+/chains/target/
