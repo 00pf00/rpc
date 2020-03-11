@@ -28,7 +28,7 @@ public class EncodeHandler extends ChannelOutboundHandlerAdapter {
             byte[] rb = resp.toByteArray();
 
             jresp.put(LogInfo.LOGO, LogInfo.SERVER_ENCODING_END);
-            jresp.put(LogInfo.PROTOCOL_MSG_SIZE,rb.length);
+            jresp.put(LogInfo.PROTOCOL_MSG_SIZE, rb.length);
             logger.info(jresp.toJSONString());
 
             ByteBuf buf = Unpooled.buffer(rb.length);

@@ -23,7 +23,7 @@ public class DecodeHandler extends ChannelInboundHandlerAdapter {
 
         jresp.put(LogInfo.LOGO, LogInfo.CLIENT_DECODING_START);
         jresp.put(LogInfo.DECODING_UUID, RPCUUID.getUUID());
-        jresp.put(LogInfo.PROTOCOL_MSG_SIZE,rb.length);
+        jresp.put(LogInfo.PROTOCOL_MSG_SIZE, rb.length);
         logger.info(jresp.toJSONString());
 
         ProtocolResqMsgProto.ProtocolRespMsg respmsg = ProtocolResqMsgProto.ProtocolRespMsg.parseFrom(rb);

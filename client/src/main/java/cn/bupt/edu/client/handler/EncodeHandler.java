@@ -25,7 +25,7 @@ public class EncodeHandler extends ChannelOutboundHandlerAdapter {
 
             byte[] rb = req.toByteArray();
 
-            jreq.put(LogInfo.PROTOCOL_MSG_SIZE,rb.length);
+            jreq.put(LogInfo.PROTOCOL_MSG_SIZE, rb.length);
             jreq.put(LogInfo.LOGO, LogInfo.CLIENT_ENCODING_END);
             logger.info(jreq.toJSONString());
 

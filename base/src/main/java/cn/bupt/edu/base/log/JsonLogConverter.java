@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class JsonLogConverter extends ClassicConverter {
     private JSONObject jobj = new JSONObject();
+
     @Override
     public String convert(ILoggingEvent iLoggingEvent) {
 

@@ -20,7 +20,7 @@ public class DeviceTaskServer extends ServerTask {
     public void run() {
         JSONObject task = new JSONObject();
         task.put(LogInfo.UUID, this.Req.getUuid());
-        task.put(LogInfo.LOGO,LogInfo.SERVER_TASK_SATRT);
+        task.put(LogInfo.LOGO, LogInfo.SERVER_TASK_SATRT);
         this.getLogger().info(task.toJSONString());
         ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
         HandlerMethod hm = TaskContext.getInstance().GetHandler(this.Req.getPath());
@@ -55,7 +55,7 @@ public class DeviceTaskServer extends ServerTask {
             ProtocolResqMsgProto.ProtocolRespMsg result = builder.build();
             this.Ctx.writeAndFlush(result);
             task.remove(LogInfo.SERVER_METHOD);
-            task.put(LogInfo.LOGO,LogInfo.SERVER_TASK_END);
+            task.put(LogInfo.LOGO, LogInfo.SERVER_TASK_END);
             this.getLogger().info(task.toJSONString());
         }
     }
