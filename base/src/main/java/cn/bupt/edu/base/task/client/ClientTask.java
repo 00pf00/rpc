@@ -4,6 +4,7 @@ import cn.bupt.edu.base.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.base.task.AbstractParentTask;
 import cn.bupt.edu.base.task.ParentTask;
 import cn.bupt.edu.base.thread.ParentThread;
+import cn.bupt.edu.base.util.LogInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,7 @@ public abstract class ClientTask extends AbstractParentTask implements Callable<
             }
             //设置uuid
             pt.setUuid(this.resp.getUuid());
-            pt.setName("serverThreadPool-" + this.resp.getUuid());
+            pt.setName(LogInfo.CLIENT_THREADPOOL + this.resp.getUuid());
         }
     }
 

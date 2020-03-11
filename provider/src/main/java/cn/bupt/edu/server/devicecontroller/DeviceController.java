@@ -44,6 +44,7 @@ public class DeviceController extends HandlerController {
             @Override
             public Object call() throws Exception {
                 DeviceInfoProto.DeviceInfo device = DeviceInfoProto.DeviceInfo.parseFrom(this.getResp().getBody());
+                this.getLogger().info("device name = {}", device.getName());
                 return device;
             }
         };

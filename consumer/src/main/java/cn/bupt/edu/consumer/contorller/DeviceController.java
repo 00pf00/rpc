@@ -8,12 +8,16 @@ import cn.bupt.edu.client.datadispatch.ClientTaskMap;
 import cn.bupt.edu.consumer.channel.RpcClient;
 import cn.bupt.edu.consumer.entity.DeviceInfoProto;
 import com.google.protobuf.ByteString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class DeviceController {
+    private final static Logger logger = LoggerFactory.getLogger(DeviceController.class);
+
     @GetMapping(value = "/device")
     @ResponseBody
     public byte[] getDeviceIn() throws Exception {
@@ -37,6 +41,7 @@ public class DeviceController {
             @Override
             public Object call() throws Exception {
                 DeviceInfoProto.DeviceInfo device = DeviceInfoProto.DeviceInfo.parseFrom(this.getResp().getBody());
+                this.getLogger().info("device name = {}", device.getName());
                 return device;
             }
         };
@@ -45,7 +50,7 @@ public class DeviceController {
         Object obj = pf.get();
         if (obj instanceof cn.bupt.edu.consumer.entity.DeviceInfoProto.DeviceInfo) {
             cn.bupt.edu.consumer.entity.DeviceInfoProto.DeviceInfo resp = (DeviceInfoProto.DeviceInfo) obj;
-            System.out.println("device name = " + resp.getName() + "\n");
+            logger.info("device name = {}", resp.getName());
             return resp.toByteArray();
         }
         return null;
