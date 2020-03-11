@@ -1,6 +1,7 @@
 package cn.bupt.edu.client.handler;
 
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
+import cn.bupt.edu.base.util.Const;
 import cn.bupt.edu.base.util.LogInfo;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.ByteBuf;
@@ -29,8 +30,9 @@ public class EncodeHandler extends ChannelOutboundHandlerAdapter {
             jreq.put(LogInfo.LOGO, LogInfo.CLIENT_ENCODING_END);
             logger.info(jreq.toJSONString());
 
-            ByteBuf buf = Unpooled.buffer(rb.length);
+            ByteBuf buf = Unpooled.buffer(rb.length + 1);
             buf.writeBytes(rb);
+            buf.writeBytes(Const.DELIMITER);
             ctx.write(buf, promise);
 
             jreq.put(LogInfo.PATH, req.getPath());

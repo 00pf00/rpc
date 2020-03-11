@@ -1,6 +1,7 @@
 package cn.bupt.edu.server.netty.handler;
 
 import cn.bupt.edu.base.protocol.ProtocolResqMsgProto;
+import cn.bupt.edu.base.util.Const;
 import cn.bupt.edu.base.util.LogInfo;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -33,6 +34,7 @@ public class EncodeHandler extends ChannelOutboundHandlerAdapter {
 
             ByteBuf buf = Unpooled.buffer(rb.length);
             buf.writeBytes(rb);
+            buf.writeBytes(Const.DELIMITER);
             ctx.write(buf, promise);
             //接收日志输出
             jresp.put(LogInfo.LOGO, LogInfo.SERVER_RESP);

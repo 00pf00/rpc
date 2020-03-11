@@ -11,7 +11,7 @@ public class RpcClient {
     public static void Start() {
         try {
             ClientThreadPool.initThreadPool();
-            ChannelFuture future = ChannelClinet.getInstance().getChannelFuture();
+            ChannelFuture future = ChannelClinet.getInstance().getChannelFuture(7000);
             ch = future.channel();
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
