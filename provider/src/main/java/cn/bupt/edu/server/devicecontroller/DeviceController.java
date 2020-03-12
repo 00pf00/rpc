@@ -5,7 +5,7 @@ import cn.bupt.edu.base.task.client.ClientFutureTask;
 import cn.bupt.edu.base.task.client.ClientTask;
 import cn.bupt.edu.base.thread.ParentThread;
 import cn.bupt.edu.client.datadispatch.ClientTaskMap;
-import cn.bupt.edu.server.channel.RpcClient;
+import cn.bupt.edu.server.channel.Client;
 import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.entity.DeviceInfoProto;
 import com.google.protobuf.ByteString;
@@ -39,7 +39,7 @@ public class DeviceController extends HandlerController {
         reqBuilder.setPath("/chains/chaininfo");
         reqBuilder.setBody(ByteString.copyFrom(deviceBuilder.build().toByteArray()));
         ProtocolReqMsgProto.ProtocolReqMsg req = reqBuilder.build();
-        RpcClient.getChannel().writeAndFlush(req);
+        Client.getChannel().writeAndFlush(req);
         ClientTask tc = new ClientTask() {
             @Override
             public Object call() throws Exception {

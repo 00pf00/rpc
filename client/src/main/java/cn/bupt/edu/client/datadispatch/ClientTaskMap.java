@@ -1,7 +1,10 @@
 package cn.bupt.edu.client.datadispatch;
 
+import cn.bupt.edu.base.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.base.task.client.ClientFutureTask;
+import cn.bupt.edu.client.threadpool.ClientThreadPool;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ClientTaskMap {
@@ -24,5 +27,11 @@ public class ClientTaskMap {
         taskMap.put(uuid, task);
     }
 
-
+    public void removeAllTask(ProtocolResqMsgProto.ProtocolRespMsg resp) {
+        for (Map.Entry<String, ClientFutureTask> entry : taskMap.entrySet()) {
+            entry.getValue().setResp(resp);
+            ClientThreadPool.getExecutorService().execute(entry.getValue());
+            taskMap.remove(entry.getKey());
+        }
+    }
 }

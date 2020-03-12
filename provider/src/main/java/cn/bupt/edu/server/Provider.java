@@ -1,6 +1,6 @@
 package cn.bupt.edu.server;
 
-import cn.bupt.edu.server.channel.RpcClient;
+import cn.bupt.edu.server.channel.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +16,7 @@ public class Provider {
         Runnable rc = new Runnable() {
             @Override
             public void run() {
-                RpcClient.Start();
+                Client.Start();
             }
         };
         new Thread(rc).start();

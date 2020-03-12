@@ -2,6 +2,7 @@ package cn.bupt.edu.client.handler;
 
 import cn.bupt.edu.base.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.base.task.client.ClientFutureTask;
+import cn.bupt.edu.base.util.Status;
 import cn.bupt.edu.client.datadispatch.ClientTaskMap;
 import cn.bupt.edu.client.threadpool.ClientThreadPool;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,5 +22,12 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             ctx.fireChannelRead(msg);
         }
 
+    }
+
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
+        builder.setStatus(Status.STATUS_DISCONNECT);
+        ProtocolResqMsgProto.ProtocolRespMsg resp = builder.build();
+        ClientTaskMap.getInstance().removeAllTask(resp);
     }
 }

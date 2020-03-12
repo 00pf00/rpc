@@ -8,12 +8,13 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.timeout.IdleStateHandler;
 
 public class ChannelPipelineFactory extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        //pipline.addLast(new IdleStateHandler(2,2,2));
+        pipeline.addLast(new IdleStateHandler(10, 0, 0));
         //pipline.addLast(new HeartBeatHandler(10));
         ByteBuf delimiter = Unpooled.copiedBuffer(Const.DELIMITER);
         pipeline.addLast(new DelimiterBasedFrameDecoder(1024, delimiter));

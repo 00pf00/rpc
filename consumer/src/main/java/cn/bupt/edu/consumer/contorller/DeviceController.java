@@ -5,7 +5,7 @@ import cn.bupt.edu.base.task.client.ClientFutureTask;
 import cn.bupt.edu.base.task.client.ClientTask;
 import cn.bupt.edu.base.util.RPCUUID;
 import cn.bupt.edu.client.datadispatch.ClientTaskMap;
-import cn.bupt.edu.consumer.channel.RpcClient;
+import cn.bupt.edu.consumer.channel.Client;
 import cn.bupt.edu.consumer.concurrency.IPRunnable;
 import cn.bupt.edu.consumer.entity.DeviceInfoProto;
 import com.google.protobuf.ByteString;
@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
 @Controller
 public class DeviceController {
     private final static Logger logger = LoggerFactory.getLogger(DeviceController.class);
-    private final static int count = 1000;
+    private final static int count = 10;
 
     @GetMapping(value = "/device")
     @ResponseBody
@@ -63,7 +63,12 @@ public class DeviceController {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    RpcClient.getChannel().writeAndFlush(req);
+                    if (Client.getChannel().isActive()) {
+                        Client.getChannel().writeAndFlush(req);
+                    } else {
+                        System.out.println("channel close \n\n");
+                    }
+
                 }
             }).start();
             countDownLatch.countDown();
