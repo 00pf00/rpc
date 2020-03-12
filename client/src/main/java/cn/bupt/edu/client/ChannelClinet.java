@@ -11,7 +11,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.util.UUID;
 
 public class ChannelClinet {
-    static final String HOST = "localhost";
+    static final String HOST = "10.201.0.145";
     public static int PORT = 8100;
     private static ChannelClinet ch = new ChannelClinet();
 
