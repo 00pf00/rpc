@@ -3,6 +3,7 @@ package cn.bupt.edu.client;
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.client.pipline.ChannelPipelineFactory;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -13,6 +14,7 @@ import java.util.UUID;
 public class ChannelClinet {
     static final String HOST = "10.201.0.145";
     public static int PORT = 8100;
+    private static Channel channel;
     private static ChannelClinet ch = new ChannelClinet();
 
     public static void main(String[] args) {
@@ -46,7 +48,7 @@ public class ChannelClinet {
 
     public ChannelFuture getChannelFuture(int... port) {
         if (port.length > 0) {
-            this.PORT = port[0];
+            PORT = port[0];
         }
         Bootstrap bootstrap = new Bootstrap();
         //创建Reactor处理线程池
@@ -57,12 +59,21 @@ public class ChannelClinet {
         bootstrap.handler(new ChannelPipelineFactory());
 
         ChannelFuture future = null;
-        try {
-            future = bootstrap.connect(HOST, PORT).sync();
-        } catch (InterruptedException e) {
-            System.out.println("client 启动异常事件\n");
-            e.printStackTrace();
+        while (future == null) {
+            try {
+                future = bootstrap.connect(HOST, PORT).sync();
+            } catch (Exception e) {
+                System.out.println("client 启动异常事件\n");
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
+        System.out.println("return\n");
         return future;
     }
+    
 }

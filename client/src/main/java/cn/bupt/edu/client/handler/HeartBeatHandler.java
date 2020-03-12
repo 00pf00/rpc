@@ -2,10 +2,8 @@ package cn.bupt.edu.client.handler;
 
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.base.util.Const;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.timeout.ReadTimeoutException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,32 +22,32 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx, this.version), 0, 1, TimeUnit.SECONDS);
     }
 
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
+//
+//        ByteBuf buf = (ByteBuf) msg;
+//        int len = buf.readableBytes();
+//        byte[] server = new byte[len];
+//        buf.readBytes(server);
+//        System.out.println(new String(server));
+//        if (count < 0) {
+//            ctx.channel().eventLoop().shutdownGracefully();
+//            ctx.close();
+//        }
+//        count = count - 1;
+//    }
 
-        ByteBuf buf = (ByteBuf) msg;
-        int len = buf.readableBytes();
-        byte[] server = new byte[len];
-        buf.readBytes(server);
-        System.out.println(new String(server));
-        if (count < 0) {
-            ctx.channel().eventLoop().shutdownGracefully();
-            ctx.close();
-        }
-        count = count - 1;
-    }
+//    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+//        if (cause instanceof ReadTimeoutException) {
+//            System.out.println("-------------read timeout-----------------\n");
+//        } else {
+//            ctx.fireExceptionCaught(cause);
+//        }
+//    }
 
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        if (cause instanceof ReadTimeoutException) {
-            System.out.println("-------------read timeout-----------------\n");
-        } else {
-            ctx.fireExceptionCaught(cause);
-        }
-    }
-
-
-    private void reconnect(String p, String i) {
-
-    }
+//
+//    private void reconnect(String p, String i) {
+//
+//    }
 
     class HeartBeatTask implements Runnable {
         private ChannelHandlerContext ctx;
