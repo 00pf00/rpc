@@ -19,6 +19,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws InterruptedException {
+        System.out.println("start heartbeat\n");
         ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx, this.version), 0, 1, TimeUnit.SECONDS);
     }
 
@@ -60,6 +61,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
+            System.out.println("heartbeat\n");
             ProtocolReqMsgProto.ProtocolReqMsg.Builder builder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
             builder.setPath(Const.REQ_HEARTBEAT);
             ctx.writeAndFlush(builder.build());
