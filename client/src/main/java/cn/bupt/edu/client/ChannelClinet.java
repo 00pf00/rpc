@@ -12,8 +12,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.util.UUID;
 
 public class ChannelClinet {
-    //static final String HOST = "10.201.0.145";
-    protected static final String HOST = "127.0.0.1";
+    static final String HOST = "10.201.0.145";
+    //protected static final String HOST = "127.0.0.1";
     private static int PORT = 8100;
     private static Channel channel;
     private static ChannelClinet ch = new ChannelClinet();
