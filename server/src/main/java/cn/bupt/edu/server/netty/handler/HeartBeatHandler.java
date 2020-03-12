@@ -12,7 +12,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
         if (msg instanceof ProtocolReqMsgProto.ProtocolReqMsg) {
             ProtocolReqMsgProto.ProtocolReqMsg req = (ProtocolReqMsgProto.ProtocolReqMsg) msg;
-            if (req.getPath() == Const.REQ_HEARTBEAT) {
+            if (req.getPath().equals(Const.REQ_HEARTBEAT)) {
                 ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
                 builder.setStatus(Status.STATUS_HEARTBEAT);
                 ctx.writeAndFlush(builder.build());

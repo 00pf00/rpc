@@ -20,6 +20,7 @@ public class ChannelPipelineFactory extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new EncodeHandler());
         pipeline.addLast(new DecodeHandler());
         pipeline.addLast(new InboundHandler());
+        pipeline.addLast(new HeartBeatHandler());
         pipeline.addLast(new OutboundHandler());
         pipeline.addLast(new ClientHandler());
 

@@ -2,69 +2,42 @@ package cn.bupt.edu.client.handler;
 
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.base.util.Const;
+import cn.bupt.edu.client.ChannelClinet;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.util.concurrent.TimeUnit;
 
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
-    private int count;
-    private String port;
-    private String version;
-    private String serviceName;
-
-    public HeartBeatHandler(int end) {
-        this.count = end;
-    }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws InterruptedException {
-        System.out.println("start heartbeat\n");
-        ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx, this.version), 0, 1, TimeUnit.SECONDS);
+        ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx.channel()), 0, 1, TimeUnit.SECONDS);
     }
 
-//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException {
-//
-//        ByteBuf buf = (ByteBuf) msg;
-//        int len = buf.readableBytes();
-//        byte[] server = new byte[len];
-//        buf.readBytes(server);
-//        System.out.println(new String(server));
-//        if (count < 0) {
-//            ctx.channel().eventLoop().shutdownGracefully();
-//            ctx.close();
-//        }
-//        count = count - 1;
-//    }
 
-//    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-//        if (cause instanceof ReadTimeoutException) {
-//            System.out.println("-------------read timeout-----------------\n");
-//        } else {
-//            ctx.fireExceptionCaught(cause);
-//        }
-//    }
+    private void reconnect() {
+        ChannelFuture future = ChannelClinet.getInstance().getChannelFuture();
+    }
 
-//
-//    private void reconnect(String p, String i) {
-//
-//    }
 
     class HeartBeatTask implements Runnable {
-        private ChannelHandlerContext ctx;
-        private String version;
+        private Channel channel;
 
-        public HeartBeatTask(ChannelHandlerContext cctx, String v) {
-            this.ctx = cctx;
-            this.version = v;
+        public HeartBeatTask(Channel ch) {
+            this.channel = ch;
         }
 
         @Override
         public void run() {
-            System.out.println("heartbeat\n");
-            ProtocolReqMsgProto.ProtocolReqMsg.Builder builder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
-            builder.setPath(Const.REQ_HEARTBEAT);
-            ctx.writeAndFlush(builder.build());
+            if (channel.isActive()) {
+                ProtocolReqMsgProto.ProtocolReqMsg.Builder builder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+                builder.setPath(Const.REQ_HEARTBEAT);
+                channel.writeAndFlush(builder.build());
+            }
+            System.out.println("hb\n");
         }
     }
 }
