@@ -1,9 +1,7 @@
 package cn.bupt.edu.client.pipline;
 
 import cn.bupt.edu.base.util.Const;
-import cn.bupt.edu.client.handler.ClientHandler;
-import cn.bupt.edu.client.handler.DecodeHandler;
-import cn.bupt.edu.client.handler.EncodeHandler;
+import cn.bupt.edu.client.handler.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelInitializer;
@@ -21,6 +19,8 @@ public class ChannelPipelineFactory extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
         pipeline.addLast(new EncodeHandler());
         pipeline.addLast(new DecodeHandler());
+        pipeline.addLast(new InboundHandler());
+        pipeline.addLast(new OutboundHandler());
         pipeline.addLast(new ClientHandler());
 
     }

@@ -1,11 +1,10 @@
 package cn.bupt.edu.client.handler;
 
-import cn.bupt.edu.client.context.data.DataContext;
-import cn.bupt.edu.client.dns.ClusterIp;
+import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
+import cn.bupt.edu.base.util.Const;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.ReadTimeoutException;
 
 import java.util.concurrent.TimeUnit;
@@ -47,16 +46,6 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
-    @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        //释放Client端处理响应的Task任务的缓存
-        DataContext.getInstance().ResetModule(this.serviceName);
-        if (evt instanceof IdleStateEvent) {
-            reconnect(ClusterIp.GetClusterIP(), this.port);
-        } else {
-            ctx.close();
-        }
-    }
 
     private void reconnect(String p, String i) {
 
@@ -73,12 +62,9 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
-//            ProtocolReqMsg req = new ProtocolReqMsg();
-//            req.setVersion(this.version);
-//            byte[] rb = req.Encode();
-//            ByteBuf buf = Unpooled.buffer(rb.length);
-//            buf.writeBytes(rb);
-//            ctx.writeAndFlush(buf);
+            ProtocolReqMsgProto.ProtocolReqMsg.Builder builder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+            builder.setPath(Const.REQ_HEARTBEAT);
+            ctx.writeAndFlush(builder.build());
         }
     }
 }

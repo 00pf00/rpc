@@ -44,7 +44,7 @@ public class ChannelClinet {
         return ch;
     }
 
-    public ChannelFuture getChannelFuture(int... port) throws InterruptedException {
+    public ChannelFuture getChannelFuture(int... port) {
         if (port.length > 0) {
             this.PORT = port[0];
         }
@@ -55,7 +55,14 @@ public class ChannelClinet {
         bootstrap.channel(NioSocketChannel.class);
         //创建Pipeline的工厂类注册Handler处理网络I/O数据
         bootstrap.handler(new ChannelPipelineFactory());
-        ChannelFuture future = bootstrap.connect(HOST, PORT).sync();
+
+        ChannelFuture future = null;
+        try {
+            future = bootstrap.connect(HOST, PORT).sync();
+        } catch (InterruptedException e) {
+            System.out.println("client 启动异常事件\n");
+            e.printStackTrace();
+        }
         return future;
     }
 }
