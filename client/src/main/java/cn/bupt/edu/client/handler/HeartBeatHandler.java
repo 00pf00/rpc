@@ -24,12 +24,12 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
 
 
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("client channelInactive\n");
-        ctx.fireChannelInactive();
-        reconnect(ctx);
-
-    }
+//    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+//        System.out.println("client channelInactive\n");
+//        ctx.fireChannelInactive();
+//        reconnect(ctx);
+//
+//    }
 
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {

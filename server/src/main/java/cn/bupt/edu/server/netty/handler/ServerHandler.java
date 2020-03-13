@@ -49,14 +49,14 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     }
 
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("serverhandler channelInactive\n");
-        for (FutureTask<Void> f : this.flist) {
-            if (f != null && !f.isDone()) {
-                f.cancel(true);
-            }
-        }
-        ctx.handler().handlerRemoved(ctx);
-        ctx.close();
-    }
+//    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+//        System.out.println("serverhandler channelInactive\n");
+//        for (FutureTask<Void> f : this.flist) {
+//            if (f != null && !f.isDone()) {
+//                f.cancel(true);
+//            }
+//        }
+//        ctx.handler().handlerRemoved(ctx);
+//        ctx.close();
+//    }
 }
