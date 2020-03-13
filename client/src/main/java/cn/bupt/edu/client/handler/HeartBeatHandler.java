@@ -11,6 +11,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
 
 import java.net.SocketAddress;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
@@ -27,6 +28,12 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
 
     }
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("HeartBeatHandler handlerRemoved\n");
+        ctx.close();
+    }
+
+
 
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("client channelInactive\n");

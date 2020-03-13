@@ -31,4 +31,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ClientTaskMap.getInstance().removeAllTask(resp);
         ctx.close();
     }
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("ClientHandler handlerRemoved\n");
+        ctx.close();
+    }
 }
