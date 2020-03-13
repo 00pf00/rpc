@@ -14,4 +14,14 @@ public class InboundHandler extends ChannelInboundHandlerAdapter {
         ctx.fireUserEventTriggered(evt);
     }
 
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println("inbound inactive \n");
+        ctx.fireChannelRead(msg);
+    }
+
+    public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("inbound channelWritabilityChanged \n");
+        ctx.fireChannelWritabilityChanged();
+    }
+
 }

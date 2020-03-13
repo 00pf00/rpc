@@ -49,6 +49,16 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     }
 
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("serverhandler handlerRemoved\n");
+        for (FutureTask<Void> f : this.flist) {
+            if (f != null && !f.isDone()) {
+                f.cancel(true);
+            }
+        }
+        ctx.close();
+    }
+
 //    @Override
 //    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
 //        if (evt instanceof IdleStateEvent) {

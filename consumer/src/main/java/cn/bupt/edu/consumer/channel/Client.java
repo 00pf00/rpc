@@ -10,7 +10,7 @@ public class Client {
 
     public static void Start() {
         ClientThreadPool.initThreadPool();
-        client = ClientManagement.RegisterChannelClient("127.0.0.1", 8100);
+        client = ClientManagement.RegisterChannelClient("127.0.0.1", 7000);
     }
 
     public static Channel getChannel() {

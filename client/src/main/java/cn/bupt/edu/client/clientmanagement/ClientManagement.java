@@ -7,10 +7,13 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ClientManagement {
+    private final static Logger logger = LoggerFactory.getLogger(ClientManagement.class);
     private static ConcurrentHashMap<String, RpcClient> clientManagement = new ConcurrentHashMap<>();
 
     public static RpcClient RegisterChannelClient(String ip, int port) {
@@ -35,7 +38,7 @@ public class ClientManagement {
             try {
                 future = bootstrap.connect(ip, port).sync();
             } catch (Exception e) {
-                System.out.println("client 启动异常事件\n");
+                logger.error("Client failed to connect to Server");
             }
             try {
                 Thread.sleep(1000);
