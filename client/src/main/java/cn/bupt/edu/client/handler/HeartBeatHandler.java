@@ -29,19 +29,23 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        reconnect(ctx);
+        System.out.println("client channelInactive\n");
         ctx.fireChannelInactive();
+        reconnect(ctx);
+
     }
 
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
             System.out.println("client readtimeout\n");
+            ctx.fireChannelInactive();
             reconnect(ctx);
         }
-        ctx.fireChannelInactive();
+
     }
 
     private void reconnect(ChannelHandlerContext ctx) {
+        ctx.channel().eventLoop().shutdownGracefully();
         SocketAddress addr = ctx.channel().remoteAddress();
         String[] ips = addr.toString().substring(1).split(":");
         Channel ch = ClientManagement.getChannel(ips[0], new Integer(ips[1]).intValue());
