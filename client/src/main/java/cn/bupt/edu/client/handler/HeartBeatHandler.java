@@ -8,6 +8,7 @@ import cn.bupt.edu.client.clientmanagement.RpcClient;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.IdleStateEvent;
 
 import java.net.SocketAddress;
 import java.util.concurrent.TimeUnit;
@@ -28,13 +29,24 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        reconnect(ctx);
+        ctx.fireChannelInactive();
+    }
+
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof IdleStateEvent) {
+            System.out.println("client readtimeout\n");
+            reconnect(ctx);
+        }
+        ctx.fireChannelInactive();
+    }
+
+    private void reconnect(ChannelHandlerContext ctx) {
         SocketAddress addr = ctx.channel().remoteAddress();
         String[] ips = addr.toString().substring(1).split(":");
-        System.out.println(ips[0] + ips[1]);
         Channel ch = ClientManagement.getChannel(ips[0], new Integer(ips[1]).intValue());
         RpcClient client = ClientManagement.getRpcClient(ips[0], ips[1]);
         client.setChannel(ch);
-        ctx.fireChannelInactive();
     }
 
 

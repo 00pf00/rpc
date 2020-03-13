@@ -30,31 +30,9 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     }
 
-//    public void channelActive(ChannelHandlerContext ctx) throws InterruptedException {
-//        ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx), 0, 1, TimeUnit.SECONDS);
-//    }
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("inbound 自定义事件\n");
+        ctx.fireChannelInactive();
+    }
 
-//    @Override
-//    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-//        System.out.println("Channel heartBeat lost");
-//        if (evt instanceof IdleStateEvent) {
-//            System.out.println(((IdleStateEvent) evt).state());
-//            //ctx.close();
-//        }
-//    }
-
-//    class HeartBeatTask implements Runnable {
-//        private ChannelHandlerContext ctx;
-//
-//        public HeartBeatTask(ChannelHandlerContext cctx) {
-//            this.ctx = cctx;
-//        }
-//
-//        @Override
-//        public void run() {
-//            ByteBuf buf = Unpooled.buffer(1);
-//            buf.writeBytes(new byte[]{'d'});
-//            ctx.writeAndFlush(buf);
-//        }
-//    }
 }

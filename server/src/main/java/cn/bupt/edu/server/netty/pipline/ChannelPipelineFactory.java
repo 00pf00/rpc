@@ -1,7 +1,10 @@
 package cn.bupt.edu.server.netty.pipline;
 
 import cn.bupt.edu.base.util.Const;
-import cn.bupt.edu.server.netty.handler.*;
+import cn.bupt.edu.server.netty.handler.DecodeHandler;
+import cn.bupt.edu.server.netty.handler.EncodeHandler;
+import cn.bupt.edu.server.netty.handler.HeartBeatHandler;
+import cn.bupt.edu.server.netty.handler.ServerHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelInitializer;
@@ -22,8 +25,5 @@ public class ChannelPipelineFactory extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new EncodeHandler());
         pipeline.addLast(new HeartBeatHandler());
         pipeline.addLast(new ServerHandler());
-        pipeline.addLast(new OutboundHandler());
-        pipeline.addLast(new InboundHandler());
-        //pipeline.addLast(new HeartBeatHandler(0));
     }
 }

@@ -59,16 +59,5 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-//    @Override
-//    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-//        if (evt instanceof IdleStateEvent) {
-//            for (FutureTask<Void> f : this.flist) {
-//                if (!f.isDone()) {
-//                    f.cancel(true);
-//                }
-//            }
-//        }
-//        ctx.close();
-//    }
 
 }
