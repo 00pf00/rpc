@@ -34,4 +34,9 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         System.out.println("inbound 自定义事件\n");
         ctx.close();
     }
+
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("HeartBeatHandler channelInactive\n");
+        ctx.fireChannelInactive();
+    }
 }
