@@ -29,10 +29,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         builder.setStatus(Status.STATUS_DISCONNECT);
         ProtocolResqMsgProto.ProtocolRespMsg resp = builder.build();
         ClientTaskMap.getInstance().removeAllTask(resp);
-        ctx.close();
-    }
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("ClientHandler handlerRemoved\n");
-        ctx.close();
+        ctx.channel().close();
     }
 }
