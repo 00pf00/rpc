@@ -2,7 +2,6 @@ package cn.bupt.edu.client.handler;
 
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
 import cn.bupt.edu.base.util.Const;
-import cn.bupt.edu.client.ChannelClinet;
 import cn.bupt.edu.client.clientmanagement.ClientManagement;
 import cn.bupt.edu.client.clientmanagement.RpcClient;
 import io.netty.channel.Channel;
@@ -11,7 +10,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
 
 import java.net.SocketAddress;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
@@ -22,18 +20,14 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     }
 
 
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        ctx.fireChannelInactive();
+        reconnect(ctx);
 
-
-//    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-//        System.out.println("client channelInactive\n");
-//        ctx.fireChannelInactive();
-//        reconnect(ctx);
-//
-//    }
+    }
 
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
-            System.out.println("client readtimeout\n");
             ctx.fireChannelInactive();
             reconnect(ctx);
         }

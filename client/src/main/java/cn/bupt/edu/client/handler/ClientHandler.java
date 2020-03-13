@@ -23,13 +23,12 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
-//    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-//        System.out.println("ClientHandler channelInactive\n");
-//        ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
-//        builder.setStatus(Status.STATUS_DISCONNECT);
-//        ProtocolResqMsgProto.ProtocolRespMsg resp = builder.build();
-//        ClientTaskMap.getInstance().removeAllTask(resp);
-//        ctx.handler().handlerRemoved(ctx);
-//        ctx.close();
-//    }
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        ProtocolResqMsgProto.ProtocolRespMsg.Builder builder = ProtocolResqMsgProto.ProtocolRespMsg.newBuilder();
+        builder.setStatus(Status.STATUS_DISCONNECT);
+        ProtocolResqMsgProto.ProtocolRespMsg resp = builder.build();
+        ClientTaskMap.getInstance().removeAllTask(resp);
+        ctx.handler().handlerRemoved(ctx);
+        ctx.close();
+    }
 }
