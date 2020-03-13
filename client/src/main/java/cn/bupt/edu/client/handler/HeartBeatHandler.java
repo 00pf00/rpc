@@ -21,17 +21,6 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         ctx.channel().eventLoop().scheduleAtFixedRate(new HeartBeatHandler.HeartBeatTask(ctx), 0, 5, TimeUnit.SECONDS);
     }
 
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        System.out.println("inbound 异常捕获事件\n");
-        ChannelClinet.setChannel(null);
-        ctx.channel().eventLoop().shutdownGracefully();
-        ctx.close();
-
-    }
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("HeartBeatHandler handlerRemoved\n");
-        ctx.close();
-    }
 
 
 
@@ -53,13 +42,17 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     private void reconnect(ChannelHandlerContext ctx) {
         ctx.channel().eventLoop().shutdownGracefully();
-        SocketAddress addr = ctx.channel().remoteAddress();
-        String[] ips = addr.toString().substring(1).split(":");
-        Channel ch = ClientManagement.getChannel(ips[0], new Integer(ips[1]).intValue());
-        RpcClient client = ClientManagement.getRpcClient(ips[0], ips[1]);
-        client.setChannel(ch);
+        ctx.channel().eventLoop().submit(new Runnable() {
+            @Override
+            public void run() {
+                SocketAddress addr = ctx.channel().remoteAddress();
+                String[] ips = addr.toString().substring(1).split(":");
+                Channel ch = ClientManagement.getChannel(ips[0], new Integer(ips[1]).intValue());
+                RpcClient client = ClientManagement.getRpcClient(ips[0], ips[1]);
+                client.setChannel(ch);
+            }
+        });
     }
-
 
     class HeartBeatTask implements Runnable {
         private ChannelHandlerContext ctx;
