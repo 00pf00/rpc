@@ -32,4 +32,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ctx.handler().handlerRemoved(ctx);
         ctx.close();
     }
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("ClientHandler handlerRemoved\n");
+        ctx.handler().handlerRemoved(ctx);
+        ctx.close();
+    }
 }

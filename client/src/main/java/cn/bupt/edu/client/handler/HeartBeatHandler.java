@@ -53,6 +53,10 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
             }
         });
     }
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("HeartBeatHandler handlerRemoved\n");
+        ctx.close();
+    }
 
     class HeartBeatTask implements Runnable {
         private ChannelHandlerContext ctx;
