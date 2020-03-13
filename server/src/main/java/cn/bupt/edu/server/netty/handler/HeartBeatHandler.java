@@ -29,4 +29,9 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         }
 
     }
+
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("inbound 自定义事件\n");
+        ctx.close();
+    }
 }

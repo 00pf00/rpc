@@ -59,15 +59,4 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        System.out.println("inbound 自定义事件\n");
-        for (FutureTask<Void> f : this.flist) {
-            if (f != null && !f.isDone()) {
-                f.cancel(true);
-            }
-        }
-        ctx.close();
-    }
-
-
 }
