@@ -14,8 +14,8 @@ public class JsonLogConverter extends ClassicConverter {
 
         jobj.put(LogInfo.TIME, iLoggingEvent.getTimeStamp());
         jobj.put(LogInfo.THREAD, iLoggingEvent.getThreadName());
-        //jobj.put(LogInfo.LOG_LEVEL, iLoggingEvent.getLevel().levelStr);
-        //jobj.put(LogInfo.CLASS_NAME, iLoggingEvent.getLoggerName());
+        jobj.put(LogInfo.LOG_LEVEL, iLoggingEvent.getLevel().levelStr);
+        jobj.put(LogInfo.CLASS_NAME, iLoggingEvent.getLoggerName());
         try {
             JSONObject msg = JSONObject.parseObject(iLoggingEvent.getFormattedMessage());
             for (String key : msg.keySet()) {
