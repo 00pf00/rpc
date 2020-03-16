@@ -12,3 +12,5 @@ rpc.iml
 /provider/target/
 /chains/chains.iml
 /chains/target/
+/analysis/analysis.iml
+/analysis/target/

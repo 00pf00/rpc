@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
 @Controller
 public class DeviceController {
     private final static Logger logger = LoggerFactory.getLogger(DeviceController.class);
-    private final static int count = 10;
+    private final static int count = 1000;
 
     @GetMapping(value = "/device")
     @ResponseBody

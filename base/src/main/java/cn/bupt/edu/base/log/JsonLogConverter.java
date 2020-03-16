@@ -7,11 +7,11 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 
 public class JsonLogConverter extends ClassicConverter {
-    private JSONObject jobj = new JSONObject();
+    //private JSONObject jobj = new JSONObject();
 
     @Override
     public String convert(ILoggingEvent iLoggingEvent) {
-
+        JSONObject jobj = new JSONObject();
         jobj.put(LogInfo.TIME, iLoggingEvent.getTimeStamp());
         jobj.put(LogInfo.THREAD, iLoggingEvent.getThreadName());
         jobj.put(LogInfo.LOG_LEVEL, iLoggingEvent.getLevel().levelStr);
@@ -21,7 +21,8 @@ public class JsonLogConverter extends ClassicConverter {
             for (String key : msg.keySet()) {
                 jobj.put(key, msg.get(key));
             }
-            jobj.remove(LogInfo.MSG);
+            //jobj.remove(LogInfo.MSG);
+            ElasticsearchRestClient.insertJson(jobj);
         } catch (JSONException e) {
             jobj.put(LogInfo.MSG, iLoggingEvent.getFormattedMessage());
         }
