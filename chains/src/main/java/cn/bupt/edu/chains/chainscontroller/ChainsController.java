@@ -1,5 +1,6 @@
 package cn.bupt.edu.chains.chainscontroller;
 
+import cn.bupt.edu.server.anotate.Handler;
 import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.entity.DeviceInfoProto;
 import com.google.protobuf.ByteString;
@@ -17,6 +18,7 @@ public class ChainsController extends HandlerController {
     private final static Logger logger = LoggerFactory.getLogger(ChainsController.class);
 
     @GetMapping("/chaininfo")
+    @Handler(path = "/chaininfo")
     @ResponseBody
     public byte[] getChainInfo(ByteString device) throws InvalidProtocolBufferException {
         DeviceInfoProto.DeviceInfo deviceInfo = DeviceInfoProto.DeviceInfo.parseFrom(device);

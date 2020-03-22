@@ -1,12 +1,12 @@
 package cn.bupt.edu.server.context.handlerContext;
 
+import cn.bupt.edu.server.anotate.Handler;
 import cn.bupt.edu.server.context.HandlerContext;
 import cn.bupt.edu.server.context.HandlerMethod;
 import cn.bupt.edu.server.context.springContext.SpringContext;
 import cn.bupt.edu.server.controller.HandlerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -31,12 +31,12 @@ public class TaskContext implements HandlerContext {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = obj.getClass().getMethods();
         for (int i = 0; i < ms.length; i++) {
-            GetMapping mapping = ms[i].getAnnotation(GetMapping.class);
-            if (mapping == null) {
+            Handler handler = ms[i].getAnnotation(Handler.class);
+            if (handler == null) {
                 continue;
             }
-            String[] values = mapping.value();
-            String mp = values[0].substring(1);
+            String values = handler.path();
+            String mp = values.substring(1);
             controller.put(mp, ms[i]);
         }
         services.put(path, controller);
