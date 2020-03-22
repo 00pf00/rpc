@@ -1,9 +1,8 @@
 package cn.bupt.edu.chains.chainscontroller;
 
-import cn.bupt.edu.server.anotate.Handler;
+import cn.bupt.edu.chains.entity.DeviceInfoProto;
+import cn.bupt.edu.server.anotate.HandlerMapping;
 import cn.bupt.edu.server.controller.HandlerController;
-import cn.bupt.edu.server.entity.DeviceInfoProto;
-import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +17,14 @@ public class ChainsController extends HandlerController {
     private final static Logger logger = LoggerFactory.getLogger(ChainsController.class);
 
     @GetMapping("/chaininfo")
-    @Handler(path = "/chaininfo")
+    @HandlerMapping(path = "/chaininfo")
     @ResponseBody
-    public byte[] getChainInfo(ByteString device) throws InvalidProtocolBufferException {
-        DeviceInfoProto.DeviceInfo deviceInfo = DeviceInfoProto.DeviceInfo.parseFrom(device);
+    public DeviceInfoProto.DeviceInfo getChainInfo(DeviceInfoProto.DeviceInfo deviceInfo) throws InvalidProtocolBufferException {
         logger.info("device name = {}", deviceInfo.getName());
         DeviceInfoProto.DeviceInfo.Builder deviceBuilder = DeviceInfoProto.DeviceInfo.newBuilder();
         deviceBuilder.setId(UUID.randomUUID().toString());
         deviceBuilder.setName("device-3");
         deviceBuilder.setTemperature(100);
-        return deviceBuilder.build().toByteArray();
+        return deviceBuilder.build();
     }
 }

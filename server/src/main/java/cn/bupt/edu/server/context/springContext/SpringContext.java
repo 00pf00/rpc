@@ -1,6 +1,5 @@
 package cn.bupt.edu.server.context.springContext;
 
-import cn.bupt.edu.server.controller.HandlerController;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -21,7 +20,7 @@ public class SpringContext implements ApplicationContextAware {
 
     }
 
-    public static <T> Map<String, HandlerController> getBeansOfType(Class<HandlerController> baseType) {
+    public static <T> Map<String, T> getBeansOfType(Class<T> baseType) {
         return applicationContext.getBeansOfType(baseType);
     }
 

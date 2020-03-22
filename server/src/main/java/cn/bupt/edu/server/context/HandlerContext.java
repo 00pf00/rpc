@@ -1,7 +1,9 @@
 package cn.bupt.edu.server.context;
 
+import cn.bupt.edu.server.controller.HandlerController;
+
 public interface HandlerContext {
-    public void RegisterHandler(Object obj, String path);
+    public void RegisterHandler(String path, HandlerController handler);
 
     public void RemoveHandler(String path);
 
@@ -9,5 +11,4 @@ public interface HandlerContext {
 
     public void SetHandler(HandlerMethod hm);
 
-    public void Handler();
 }

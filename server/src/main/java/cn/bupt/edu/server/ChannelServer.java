@@ -1,7 +1,7 @@
 package cn.bupt.edu.server;
 
 
-import cn.bupt.edu.server.context.handlerContext.TaskContext;
+import cn.bupt.edu.server.context.handlerContext.TaskHandlerContext;
 import cn.bupt.edu.server.netty.pipline.ChannelPipelineFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -57,7 +57,7 @@ public class ChannelServer {
         if (port.length > 0) {
             this.PORT = port[0];
         }
-        TaskContext.getInstance().initContext();
+        TaskHandlerContext.getInstance().initContext();
         NettyServer();
     }
 }
