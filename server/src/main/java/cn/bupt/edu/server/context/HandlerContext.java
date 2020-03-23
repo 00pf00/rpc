@@ -2,8 +2,12 @@ package cn.bupt.edu.server.context;
 
 import cn.bupt.edu.server.controller.HandlerController;
 
+import java.util.concurrent.ArrayBlockingQueue;
+
 public interface HandlerContext {
-    public void RegisterHandler(String path, HandlerController handler);
+    public void RegisterHandler(String path, HandlerController handler, ArrayBlockingQueue queue);
+
+    public void RegisterMethod(String path, HandlerController handler);
 
     public void RemoveHandler(String path);
 

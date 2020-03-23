@@ -5,9 +5,11 @@ import cn.bupt.edu.server.anotate.TaskMapping;
 import cn.bupt.edu.server.task.DefaultTaskServer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 @TaskMapping(paths = {"/restchains/save", "/chains/chaininfo"})
 public class DeviceTask extends DefaultTaskServer {
     @Override

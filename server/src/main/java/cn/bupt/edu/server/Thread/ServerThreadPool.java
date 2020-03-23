@@ -21,7 +21,7 @@ public class ServerThreadPool {
     public static void initThreadPool(String... servcie) {
         if (servcie.length > 0) {
             for (int i = 0; i < servcie.length; i++) {
-                ArrayBlockingQueue<Runnable> tasks = new ArrayBlockingQueue<Runnable>(10000);
+                ArrayBlockingQueue<Runnable> tasks = new ArrayBlockingQueue<Runnable>(5000);
                 ExecutorService task = new ServerThreadPoolExecutor(2, 4, 10, SECONDS, tasks, new ServerTFactory(), new ServerRejectedExecutionHandler());
                 esMap.put(servcie[i], task);
             }

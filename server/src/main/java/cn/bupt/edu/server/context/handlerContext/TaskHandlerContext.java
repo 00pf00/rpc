@@ -10,6 +10,7 @@ import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.task.DefaultTaskServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -20,9 +21,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     private final static Logger logger = LoggerFactory.getLogger(TaskHandlerContext.class);
     private static TaskHandlerContext ctx;
     private static ConcurrentHashMap<String, ArrayBlockingQueue<Object>> handlers = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, ArrayBlockingQueue<Object>> tasks = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, ArrayBlockingQueue<DefaultTaskServer>> tasks = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, ConcurrentHashMap<String, Method>> handlerMap = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, DefaultTaskServer> taskMap = new ConcurrentHashMap<>();
 
     public static TaskHandlerContext getInstance() {
         if (ctx == null) {
@@ -32,7 +32,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     }
 
     @Override
-    public void RegisterHandler(String path, HandlerController handler) {
+    public void RegisterMethod(String path, HandlerController handler) {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
         for (int i = 0; i < ms.length; i++) {
@@ -40,11 +40,14 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             if (handlerMapping == null) {
                 continue;
             }
-            String values = handlerMapping.path();
-            String mp = values.substring(1);
-            controller.put(mp, ms[i]);
+            controller.put(handlerMapping.path(), ms[i]);
         }
-        handlerMap.put(path, controller);
+        RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
+        if (rm == null) {
+            handlerMap.put("/" + path, controller);
+        } else {
+            handlerMap.put(rm.name(), controller);
+        }
     }
 
     @Override
@@ -52,32 +55,49 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
 
     }
 
+
+    @Override
+    public void RegisterHandler(String path, HandlerController handler, ArrayBlockingQueue queue) {
+        RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
+        if (rm == null) {
+            handlers.put("/" + path, queue);
+        } else {
+            handlers.put(rm.name(), queue);
+        }
+    }
+
     @Override
     public HandlerMethod GetHandler(String path) {
-        String[] vs = path.split("/");
-//        Object bean = SpringContext.getBean(vs[1]);
-        ArrayBlockingQueue beanQueue = handlers.get(vs[1]);
+        ArrayBlockingQueue beanQueue = null;
+        Method m = null;
+        String beanPath = "";
+        for (String key : handlers.keySet()) {
+            if (path.startsWith(key)) {
+                ConcurrentHashMap<String, Method> hms = handlerMap.get(key);
+                m = hms.get(path.replace(key, ""));
+                if (m != null) {
+                    beanQueue = handlers.get(key);
+                    beanPath = key;
+                    break;
+                }
+            }
+        }
         if (beanQueue == null) {
-            logger.error("Service is not registered service = {} ", vs[1]);
+            logger.error("Service is not registered service = {} ", path);
             return null;
         }
         Object bean = null;
         try {
             bean = beanQueue.take();
         } catch (InterruptedException e) {
-            logger.error("Failed to get service service = {} err = {}", vs[1], e.getMessage());
+            logger.error("Failed to get service service = {} err = {}", path, e.getMessage());
             return null;
         }
-        ConcurrentHashMap<String, Method> service = handlerMap.get(vs[1]);
-        if (service == null) {
-            logger.error("Service is not registered service = {} ", vs[1]);
-            return null;
-        }
-        Method m = service.get(vs[2]);
         if (m == null) {
-            logger.error("Get method failed service = {} method = {}", vs[1], vs[2]);
+            logger.error("Get method failed service = {} ", path);
+            return null;
         }
-        HandlerMethod hm = new HandlerMethod(bean, m, vs[1]);
+        HandlerMethod hm = new HandlerMethod(bean, m, beanPath);
         return hm;
     }
 
@@ -95,49 +115,49 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     public void initContext(int... bc) {
         Map<String, HandlerController> handlers = SpringContext.getBeansOfType(HandlerController.class);
         for (Map.Entry<String, HandlerController> entry : handlers.entrySet()) {
-            ctx.RegisterHandler(entry.getKey(), entry.getValue());
+            ctx.RegisterMethod(entry.getKey(), entry.getValue());
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
                 for (int i = 1; i < bc.length; i++) {
                     beanQueue.add(SpringContext.getBean(entry.getKey()));
                 }
-                this.handlers.put(entry.getKey(), beanQueue);
+                ctx.RegisterHandler(entry.getKey(), entry.getValue(), beanQueue);
             } else {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(1);
-                beanQueue.add(SpringContext.getBean(entry.getKey()));
-                this.handlers.put(entry.getKey(), beanQueue);
+                beanQueue.add(entry.getValue());
+                ctx.RegisterHandler(entry.getKey(), entry.getValue(), beanQueue);
             }
         }
 
         Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
         for (Map.Entry<String, DefaultTaskServer> entry : tasks.entrySet()) {
-            ctx.RegisterTask(entry.getValue());
-            if (bc.length > 0) {
-                ArrayBlockingQueue<Object> taskQueue = new ArrayBlockingQueue<>(bc[1]);
-                for (int i = 1; i < bc.length; i++) {
-                    taskQueue.add(SpringContext.getBean(entry.getKey()));
-                }
-                this.tasks.put(entry.getKey(), taskQueue);
-            } else {
-                ArrayBlockingQueue<Object> taskQueue = new ArrayBlockingQueue<>(1);
-                taskQueue.add(SpringContext.getBean(entry.getKey()));
-                this.tasks.put(entry.getKey(), taskQueue);
+            ArrayBlockingQueue<DefaultTaskServer> queue = new ArrayBlockingQueue<>(2000);
+            queue.add(entry.getValue());
+            for (int i = 1; i < 2000; i++) {
+                queue.add(SpringContext.getBean(entry.getKey()));
             }
+            ctx.RegisterTask(entry.getValue(), queue);
         }
 
     }
 
     @Override
-    public void RegisterTask(DefaultTaskServer task) {
+    public void RegisterTask(DefaultTaskServer task, ArrayBlockingQueue<DefaultTaskServer> queue) {
         TaskMapping taskMapping = task.getClass().getAnnotation(TaskMapping.class);
         for (String path : taskMapping.paths()) {
-            taskMap.put(path, task);
+            tasks.put(path, queue);
         }
 
     }
 
     @Override
     public DefaultTaskServer GetTask(String path) {
-        return taskMap.get(path);
+        ArrayBlockingQueue<DefaultTaskServer> queue = tasks.get(path);
+        try {
+            return queue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
