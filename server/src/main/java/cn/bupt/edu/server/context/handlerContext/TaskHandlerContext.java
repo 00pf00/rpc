@@ -39,6 +39,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     public void RegisterMethod(String path, HandlerController handler, int... bc) {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
+        logger.info("class name = {}",handler.getClass().getSuperclass().getName());
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
             HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i], HandlerMapping.class);
