@@ -36,12 +36,12 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     public void RegisterMethod(String path, HandlerController handler, int... bc) {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
-        logger.info("method length = {}",ms.length);
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
             Annotation[] as = ms[i].getAnnotations();
+            logger.info("method = {} length = {}",ms[i].getName(),as.length);
             for (int j =0 ; j < as.length;j++){
-                logger.info("annotation type = {}",as[i].annotationType().getName());
+                logger.info("annotation type = {}",as[j].annotationType().getName());
             }
             HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
