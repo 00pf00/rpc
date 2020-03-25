@@ -34,7 +34,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     }
 
-    private void reconnect(ChannelHandlerContext ctx) {
+    private void reconnect(final ChannelHandlerContext ctx) {
         ctx.channel().eventLoop().shutdownGracefully();
         ctx.channel().eventLoop().submit(new Runnable() {
             @Override
