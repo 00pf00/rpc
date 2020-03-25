@@ -43,7 +43,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             if (handlerMapping == null) {
                 continue;
             }
-            logger.info("method name = {}", handlerMapping.path());
+            logger.info("method path = {}", handlerMapping.path());
             controller.put(handlerMapping.path(), ms[i]);
             if (!flag) {
                 flag = true;
@@ -56,6 +56,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
                 logger.info("register service = {}", path);
             } else {
                 handlerMap.put(rm.value()[0], controller);
+                path = rm.value()[0];
                 logger.info("register service = {}", rm.value()[0]);
             }
             if (bc.length > 0) {
