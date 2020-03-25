@@ -52,13 +52,13 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         if (flag) {
             RequestMapping rm = AnnotationUtils.findAnnotation(handler.getClass(), RequestMapping.class);
             if (rm == null) {
-                handlerMap.put("/" + path, controller);
+                path = "/" + path;
                 logger.info("register service = {}", path);
             } else {
-                handlerMap.put(rm.value()[0], controller);
                 path = rm.value()[0];
                 logger.info("register service = {}", rm.value()[0]);
             }
+            handlerMap.put(path, controller);
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
                 beanQueue.add(handler);
@@ -82,12 +82,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
 
     @Override
     public void RegisterHandler(String path, HandlerController handler, ArrayBlockingQueue queue) {
-        RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
-        if (rm == null) {
-            handlers.put("/" + path, queue);
-        } else {
-            handlers.put(rm.name(), queue);
-        }
+        handlers.put(path, queue);
     }
 
     @Override
