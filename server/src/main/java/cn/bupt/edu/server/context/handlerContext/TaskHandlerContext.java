@@ -32,21 +32,39 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     }
 
     @Override
-    public void RegisterMethod(String path, HandlerController handler) {
+    public void RegisterMethod(String path, HandlerController handler, int... bc) {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
+        boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
             HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
             }
             controller.put(handlerMapping.path(), ms[i]);
+            if (!flag) {
+                flag = true;
+            }
         }
-        RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
-        if (rm == null) {
-            handlerMap.put("/" + path, controller);
-        } else {
-            handlerMap.put(rm.name(), controller);
+        if (flag) {
+            RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
+            if (rm == null) {
+                handlerMap.put("/" + path, controller);
+            } else {
+                handlerMap.put(rm.name(), controller);
+            }
+            if (bc.length > 0) {
+                ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
+                beanQueue.add(handler);
+                for (int i = 1; i < bc.length; i++) {
+                    beanQueue.add(SpringContext.getBean(path));
+                }
+                ctx.RegisterHandler(path, handler, beanQueue);
+            } else {
+                ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(1);
+                beanQueue.add(handler);
+                ctx.RegisterHandler(path, handler, beanQueue);
+            }
         }
     }
 
@@ -115,18 +133,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     public void initContext(int... bc) {
         Map<String, HandlerController> handlers = SpringContext.getBeansOfType(HandlerController.class);
         for (Map.Entry<String, HandlerController> entry : handlers.entrySet()) {
-            ctx.RegisterMethod(entry.getKey(), entry.getValue());
-            if (bc.length > 0) {
-                ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
-                for (int i = 1; i < bc.length; i++) {
-                    beanQueue.add(SpringContext.getBean(entry.getKey()));
-                }
-                ctx.RegisterHandler(entry.getKey(), entry.getValue(), beanQueue);
-            } else {
-                ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(1);
-                beanQueue.add(entry.getValue());
-                ctx.RegisterHandler(entry.getKey(), entry.getValue(), beanQueue);
-            }
+            ctx.RegisterMethod(entry.getKey(), entry.getValue(), bc);
+
         }
 
         Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
