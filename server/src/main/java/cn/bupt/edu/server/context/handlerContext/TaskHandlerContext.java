@@ -38,7 +38,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
-            Annotation[] as = ms[i].getAnnotations();
+            Annotation[] as = ms[i].getDeclaredAnnotations();
             logger.info("method = {} length = {}",ms[i].getName(),as.length);
             for (int j =0 ; j < as.length;j++){
                 logger.info("annotation type = {}",as[j].annotationType().getName());
