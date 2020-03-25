@@ -50,8 +50,10 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
             if (rm == null) {
                 handlerMap.put("/" + path, controller);
+                logger.info("register service = {}",path);
             } else {
                 handlerMap.put(rm.name(), controller);
+                logger.info("register service = {}",rm.name());
             }
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
