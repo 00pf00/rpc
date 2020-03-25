@@ -139,9 +139,10 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             logger.info("register method = {}",entry.getKey());
             ctx.RegisterMethod(entry.getKey(), entry.getValue(), bc);
         }
-        logger.info("start register method");
+        logger.info("start register task");
         Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
         for (Map.Entry<String, DefaultTaskServer> entry : tasks.entrySet()) {
+            logger.info("register task = {}",entry.getKey());
             ArrayBlockingQueue<DefaultTaskServer> queue = new ArrayBlockingQueue<>(2000);
             queue.add(entry.getValue());
             for (int i = 1; i < 2000; i++) {
