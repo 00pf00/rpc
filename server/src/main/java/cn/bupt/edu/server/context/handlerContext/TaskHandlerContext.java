@@ -52,6 +52,9 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         if (flag) {
             RequestMapping rm =AnnotationUtils.findAnnotation(handler.getClass(),RequestMapping.class);
             logger.info("name = {}",rm.name());
+            logger.info("path = {}",rm.path());
+            logger.info("value = {}",rm.value());
+            logger.info("params = {}",rm.params());
             //RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
             if (rm == null) {
                 handlerMap.put("/" + path, controller);
