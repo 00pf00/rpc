@@ -19,7 +19,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class ElasticsearchRestClient {
     private static RestHighLevelClient restClient;
-    private static ArrayBlockingQueue<JSONObject> objs = new ArrayBlockingQueue<>(10000);
+    private static ArrayBlockingQueue<JSONObject> objs = new ArrayBlockingQueue<JSONObject>(10000);
 
     public static void initElasticsearchRestClient(String iindex) {
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
@@ -40,7 +40,7 @@ public class ElasticsearchRestClient {
         objs = new ArrayBlockingQueue<JSONObject>(length);
     }
 
-    public static void initBulkThread(RestHighLevelClient client, String iindex) {
+    public static void initBulkThread(final RestHighLevelClient client, final String iindex) {
         new Thread(new Runnable() {
             @Override
             public void run() {

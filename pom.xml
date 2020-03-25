@@ -11,34 +11,11 @@
     <modules>
         <module>server</module>
         <module>client</module>
-        <module>consumer</module>
-        <module>provider</module>
         <module>base</module>
-        <module>chains</module>
-        <module>analysis</module>
     </modules>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.3.RELEASE</version>
-    </parent>
-
     <dependencies>
-        <!-- Middleware -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--es-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-transport</artifactId>
@@ -49,7 +26,12 @@
             <artifactId>netty-handler</artifactId>
             <version>4.1.41.Final</version>
         </dependency>
-
+        <!---日志-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.22</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -76,31 +58,6 @@
             <version>7.6.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>3.11.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.protobuf-java-format</groupId>
-            <artifactId>protobuf-java-format</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hubspot.jackson</groupId>
-            <artifactId>jackson-datatype-protobuf</artifactId>
-            <version>0.9.11-jackson2.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java-util</artifactId>
-            <version>3.11.4</version>
-        </dependency>
-
-
         <!--consumer provider-->
     </dependencies>
 
@@ -110,17 +67,17 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--解决打包失败-->
-                <version>1.3.7.RELEASE</version>
-            </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-            <!--                <version>3.1</version>-->
-            <!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                &lt;!&ndash;解决打包失败&ndash;&gt;-->
+<!--                <version>1.3.7.RELEASE</version>-->
+<!--            </plugin>-->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.1</version>
+                        </plugin>
         </plugins>
     </build>
 

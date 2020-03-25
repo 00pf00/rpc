@@ -45,19 +45,19 @@ public class Search {
             Map<String, Object> map = resp.getHits().getHits()[i].getSourceAsMap();
             System.out.println(map.get(LogInfo.UUID).toString());
             if (time == 0L || !uuid.equals(map.get(LogInfo.UUID).toString())) {
-                time = (long) map.get(LogInfo.TIME);
+                time = (Long) map.get(LogInfo.TIME);
                 uuid = map.get(LogInfo.UUID).toString();
             } else {
                 if (map.get(LogInfo.LOGO).equals(attr1) && uuid.equals(map.get(LogInfo.UUID).toString())) {
                     JSONObject json = new JSONObject();
-                    json.put(attr, time - (long) map.get(LogInfo.TIME));
+                     json.put(attr, time - Long.valueOf(String.valueOf( map.get(LogInfo.TIME))).longValue());
                     ElasticsearchRestClient.insertJson(json);
 
 
                 }
                 if (map.get(LogInfo.LOGO).equals(attr2) && uuid.equals(map.get(LogInfo.UUID).toString())) {
                     JSONObject json = new JSONObject();
-                    json.put(attr, (long) map.get(LogInfo.TIME) - time);
+                    json.put(attr, Long.valueOf(String.valueOf( map.get(LogInfo.TIME))).longValue() - time);
                     ElasticsearchRestClient.insertJson(json);
                 }
                 uuid = "";
