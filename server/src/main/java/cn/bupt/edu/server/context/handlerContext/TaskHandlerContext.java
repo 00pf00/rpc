@@ -10,6 +10,7 @@ import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.task.DefaultTaskServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.annotation.Annotation;
@@ -36,7 +37,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     public void RegisterMethod(String path, HandlerController handler, int... bc) {
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
-        logger.info("class package = {} name = {}",handler.getClass().getPackage(),handler.getClass().getTypeName());
+        logger.info("class package = {} name = {}",handler.getClass().getPackage(),handler.getClass());
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
             Annotation[] as = ms[i].getDeclaredAnnotations();
@@ -44,7 +45,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             for (int j =0 ; j < as.length;j++){
                 logger.info("annotation type = {}",as[j].annotationType().getName());
             }
-            HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
+            HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i],HandlerMapping.class);
+            //HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
             }
