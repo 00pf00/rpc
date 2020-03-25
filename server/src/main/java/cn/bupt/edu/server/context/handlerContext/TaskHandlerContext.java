@@ -37,13 +37,18 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
 
     @Override
     public void RegisterMethod(String path, HandlerController handler, int... bc) {
+        try {
+            handler = (HandlerController)getCglibProxyTargetObject(handler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
-        //logger.info("class name = {}",handler.getClass().getSuperclass().getName());
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
 
-            HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i], HandlerMapping.class);
+            //HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i], HandlerMapping.class);
+            HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
             }
@@ -54,7 +59,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             }
         }
         if (flag) {
-            RequestMapping rm = AnnotationUtils.findAnnotation(handler.getClass(), RequestMapping.class);
+            //RequestMapping rm = AnnotationUtils.findAnnotation(handler.getClass(), RequestMapping.class);
+            RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
             if (rm == null) {
                 path = "/" + path;
                 logger.info("register service = {}", path);
@@ -63,26 +69,18 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
                 logger.info("register service = {}", rm.value()[0]);
             }
             handlerMap.put(path, controller);
-            Object target = null;
-            try {
-                target = getCglibProxyTargetObject(handler);
 
-            } catch (Exception e) {
-                logger.error("get cglib target class fial err = {} ", e.toString());
-                return;
-            }
-            HandlerController targetHandler = (HandlerController) target;
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
                 beanQueue.add(handler);
                 for (int i = 1; i < bc.length; i++) {
                     beanQueue.add(SpringContext.getBean(path));
                 }
-                ctx.RegisterHandler(path, targetHandler, beanQueue);
+                ctx.RegisterHandler(path, handler, beanQueue);
             } else {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(1);
                 beanQueue.add(handler);
-                ctx.RegisterHandler(path, targetHandler, beanQueue);
+                ctx.RegisterHandler(path, handler, beanQueue);
             }
         }
     }
