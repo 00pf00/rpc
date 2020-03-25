@@ -37,6 +37,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
+            logger.info("method name = {}",ms[i].getName());
             HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
