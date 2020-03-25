@@ -1,5 +1,6 @@
 package cn.bupt.edu.server.context.handlerContext;
 
+import cn.bupt.edu.base.util.Util;
 import cn.bupt.edu.server.anotate.HandlerMapping;
 import cn.bupt.edu.server.anotate.TaskMapping;
 import cn.bupt.edu.server.context.HandlerContext;
@@ -90,6 +91,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
 
     @Override
     public HandlerMethod GetHandler(String path) {
+        path = Util.replace(path);
         ArrayBlockingQueue beanQueue = null;
         Method m = null;
         String beanPath = "";
