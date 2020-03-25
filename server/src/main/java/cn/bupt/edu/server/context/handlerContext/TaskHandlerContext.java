@@ -134,7 +134,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             ArrayBlockingQueue<DefaultTaskServer> queue = new ArrayBlockingQueue<>(2000);
             queue.add(entry.getValue());
             for (int i = 1; i < 2000; i++) {
-                queue.add(SpringContext.getBean(entry.getKey()));
+                queue.add((DefaultTaskServer) SpringContext.getBean(entry.getKey()));
             }
             ctx.RegisterTask(entry.getValue(), queue);
         }
