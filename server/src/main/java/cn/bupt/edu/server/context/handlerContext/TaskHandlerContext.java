@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -39,29 +38,24 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
-            HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i],HandlerMapping.class);
+            HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i], HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
             }
-            logger.info("method name = {}",handlerMapping.path());
+            logger.info("method name = {}", handlerMapping.path());
             controller.put(handlerMapping.path(), ms[i]);
             if (!flag) {
                 flag = true;
             }
         }
         if (flag) {
-            RequestMapping rm =AnnotationUtils.findAnnotation(handler.getClass(),RequestMapping.class);
-            logger.info("name = {}",rm.name());
-            logger.info("path = {}",rm.path());
-            logger.info("value = {}",rm.value());
-            logger.info("params = {}",rm.params());
-            //RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
+            RequestMapping rm = AnnotationUtils.findAnnotation(handler.getClass(), RequestMapping.class);
             if (rm == null) {
                 handlerMap.put("/" + path, controller);
-                logger.info("register service = {}",path);
+                logger.info("register service = {}", path);
             } else {
-                handlerMap.put(rm.name(), controller);
-                logger.info("register service = {}",rm.name());
+                handlerMap.put(rm.value()[0], controller);
+                logger.info("register service = {}", rm.value()[0]);
             }
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
@@ -144,17 +138,17 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         logger.info("start register method");
         Map<String, HandlerController> handlers = SpringContext.getBeansOfType(HandlerController.class);
         for (Map.Entry<String, HandlerController> entry : handlers.entrySet()) {
-            logger.info("register method = {}",entry.getKey());
+            logger.info("register method = {}", entry.getKey());
             ctx.RegisterMethod(entry.getKey(), entry.getValue(), bc);
         }
         logger.info("start register task");
         Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
         for (Map.Entry<String, DefaultTaskServer> entry : tasks.entrySet()) {
-            logger.info("register task = {}",entry.getKey());
+            logger.info("register task = {}", entry.getKey());
             ArrayBlockingQueue<DefaultTaskServer> queue = new ArrayBlockingQueue<>(2000);
             queue.add(entry.getValue());
             for (int i = 1; i < 2000; i++) {
-                queue.add((DefaultTaskServer) SpringContext.getBean(entry.getKey()));
+                queue.add(SpringContext.getBean(entry.getKey()));
             }
             ctx.RegisterTask(entry.getValue(), queue);
         }
