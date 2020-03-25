@@ -15,7 +15,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class ServerThreadPool {
     private final static Logger logger = LoggerFactory.getLogger(ServerThreadPool.class);
     private static ConcurrentHashMap<String, ExecutorService> esMap = new ConcurrentHashMap<>();
-    private static ExecutorService es = new ServerThreadPoolExecutor(2, 4, 10, SECONDS, new ArrayBlockingQueue<>(10), new ServerTFactory(), new ServerRejectedExecutionHandler());
+    private static ExecutorService es = new ServerThreadPoolExecutor(2, 4, 10, SECONDS, new ArrayBlockingQueue<Runnable>(10), new ServerTFactory(), new ServerRejectedExecutionHandler());
 
 
     public static void initThreadPool(String... servcie) {
