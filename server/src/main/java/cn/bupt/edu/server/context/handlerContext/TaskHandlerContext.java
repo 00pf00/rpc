@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -37,6 +38,10 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
+            Annotation[] as = ms[i].getAnnotations();
+            for (int j =0 ; j < as.length;j++){
+                logger.info("annotation type = {}",as[i].annotationType().getName());
+            }
             HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
