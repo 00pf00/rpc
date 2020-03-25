@@ -11,9 +11,11 @@ import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.task.DefaultTaskServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -59,17 +61,26 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
                 logger.info("register service = {}", rm.value()[0]);
             }
             handlerMap.put(path, controller);
+            Object target = null;
+            try {
+                target = getCglibProxyTargetObject(handler);
+
+            } catch (Exception e) {
+                logger.error("get cglib target class fial err = {} ", e.toString());
+                return;
+            }
+            HandlerController targetHandler = (HandlerController) target;
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
                 beanQueue.add(handler);
                 for (int i = 1; i < bc.length; i++) {
                     beanQueue.add(SpringContext.getBean(path));
                 }
-                ctx.RegisterHandler(path, handler, beanQueue);
+                ctx.RegisterHandler(path, targetHandler, beanQueue);
             } else {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(1);
                 beanQueue.add(handler);
-                ctx.RegisterHandler(path, handler, beanQueue);
+                ctx.RegisterHandler(path, targetHandler, beanQueue);
             }
         }
     }
@@ -171,5 +182,17 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private Object getCglibProxyTargetObject(Object proxy) throws Exception {
+        Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
+        h.setAccessible(true);
+        Object dynamicAdvisedInterceptor = h.get(proxy);
+
+        Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
+        advised.setAccessible(true);
+
+        Object target = ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
+        return target;
     }
 }
