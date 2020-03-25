@@ -43,7 +43,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             if (handlerMapping == null) {
                 continue;
             }
-            logger.info("method name = {}",ms[i].getName());
+            logger.info("method name = {}",handlerMapping.path());
             controller.put(handlerMapping.path(), ms[i]);
             if (!flag) {
                 flag = true;
