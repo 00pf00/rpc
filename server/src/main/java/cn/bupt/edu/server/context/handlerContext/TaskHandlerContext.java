@@ -133,12 +133,12 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
 
 
     public void initContext(int... bc) {
+        logger.info("start register method");
         Map<String, HandlerController> handlers = SpringContext.getBeansOfType(HandlerController.class);
         for (Map.Entry<String, HandlerController> entry : handlers.entrySet()) {
             ctx.RegisterMethod(entry.getKey(), entry.getValue(), bc);
-
         }
-
+        logger.info("start register method");
         Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
         for (Map.Entry<String, DefaultTaskServer> entry : tasks.entrySet()) {
             ArrayBlockingQueue<DefaultTaskServer> queue = new ArrayBlockingQueue<>(2000);
