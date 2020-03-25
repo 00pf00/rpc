@@ -136,6 +136,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         logger.info("start register method");
         Map<String, HandlerController> handlers = SpringContext.getBeansOfType(HandlerController.class);
         for (Map.Entry<String, HandlerController> entry : handlers.entrySet()) {
+            logger.info("register method = {}",entry.getKey());
             ctx.RegisterMethod(entry.getKey(), entry.getValue(), bc);
         }
         logger.info("start register method");
