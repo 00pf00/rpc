@@ -15,8 +15,12 @@ import io.netty.channel.ChannelHandlerContext;
 import java.lang.reflect.Method;
 
 public abstract class DefaultTaskServer extends ServerTask {
-    public DefaultTaskServer(ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
+    private DefaultTaskServer(ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
         super(req, ctx);
+    }
+
+    public DefaultTaskServer() {
+
     }
 
     @Override

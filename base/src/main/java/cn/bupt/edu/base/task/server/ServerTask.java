@@ -14,9 +14,13 @@ public abstract class ServerTask extends AbstractParentTask implements Runnable,
     public ProtocolReqMsgProto.ProtocolReqMsg Req;
     public ChannelHandlerContext Ctx;
 
-    public ServerTask(ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
+    protected ServerTask(ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
         this.Req = req;
         this.Ctx = ctx;
+    }
+
+    public ServerTask() {
+
     }
 
     public void initThread() {
