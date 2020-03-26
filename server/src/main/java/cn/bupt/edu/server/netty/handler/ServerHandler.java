@@ -34,8 +34,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 builder.setStatus(Status.STATUS_NOTINIT);
                 ctx.writeAndFlush(builder.build());
             } else {
-                DefaultTaskServer task = TaskHandlerContext.getInstance().GetTask(req.getPath());
-                task.setTask(req, ctx);
+                DefaultTaskServer task = TaskHandlerContext.getInstance().GetTask(req.getPath(), req, ctx);
                 ServerFutureTask ftask = new ServerFutureTask(task, null);
                 es.execute(ftask);
                 for (int i = 0; i < flist.length; i++) {

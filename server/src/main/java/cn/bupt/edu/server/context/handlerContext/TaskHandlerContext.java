@@ -1,5 +1,7 @@
 package cn.bupt.edu.server.context.handlerContext;
 
+import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
+import cn.bupt.edu.base.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.base.util.Util;
 import cn.bupt.edu.server.anotate.HandlerMapping;
 import cn.bupt.edu.server.anotate.TaskMapping;
@@ -9,12 +11,14 @@ import cn.bupt.edu.server.context.TaskContext;
 import cn.bupt.edu.server.context.springContext.SpringContext;
 import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.task.DefaultTaskServer;
+import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -25,7 +29,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     private final static Logger logger = LoggerFactory.getLogger(TaskHandlerContext.class);
     private static TaskHandlerContext ctx;
     private static ConcurrentHashMap<String, ArrayBlockingQueue<Object>> handlers = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, ArrayBlockingQueue<DefaultTaskServer>> tasks = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Class<? extends DefaultTaskServer>> tasks = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, ConcurrentHashMap<String, Method>> handlerMap = new ConcurrentHashMap<>();
 
     public static TaskHandlerContext getInstance() {
@@ -155,32 +159,41 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
         for (Map.Entry<String, DefaultTaskServer> entry : tasks.entrySet()) {
             logger.info("register task = {}", entry.getKey());
-            ArrayBlockingQueue<DefaultTaskServer> queue = new ArrayBlockingQueue<>(2000);
-            queue.add(entry.getValue());
-            for (int i = 1; i < 2000; i++) {
-                queue.add(SpringContext.getBean(entry.getKey()));
-            }
-            ctx.RegisterTask(entry.getValue(), queue);
+            ctx.RegisterTask(entry.getValue());
         }
 
     }
 
     @Override
-    public void RegisterTask(DefaultTaskServer task, ArrayBlockingQueue<DefaultTaskServer> queue) {
+    public void RegisterTask(DefaultTaskServer task) {
+        Class<? extends DefaultTaskServer> tclass = task.getClass();
         TaskMapping taskMapping = task.getClass().getAnnotation(TaskMapping.class);
         for (String path : taskMapping.paths()) {
-            tasks.put(path, queue);
+            tasks.put(path, tclass);
         }
 
     }
 
     @Override
-    public DefaultTaskServer GetTask(String path) {
-        ArrayBlockingQueue<DefaultTaskServer> queue = tasks.get(path);
+    public DefaultTaskServer GetTask(String path, ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
+        Class<? extends DefaultTaskServer> st = tasks.get(path);
+        Constructor stc = null;
         try {
-            return queue.take();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            stc = st.getDeclaredConstructor(ProtocolResqMsgProto.ProtocolRespMsg.class, ChannelHandlerContext.class);
+        } catch (Exception e) {
+            logger.error("get defaultTaskServer constructor fail ! err = {}", e.toString());
+            return null;
+        }
+        stc.setAccessible(true);
+        Object sto = null;
+        try {
+            sto = stc.newInstance(req, ctx);
+        } catch (Exception e) {
+            logger.error("get defaultTaskServer object fail ! err = {} ", e.toString());
+            return null;
+        }
+        if (sto instanceof DefaultTaskServer) {
+            return (DefaultTaskServer) sto;
         }
         return null;
     }
