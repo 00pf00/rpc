@@ -12,6 +12,8 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.channel.ChannelHandlerContext;
 
+import java.lang.reflect.Method;
+
 public abstract class DefaultTaskServer extends ServerTask {
     public DefaultTaskServer() {
         super();
@@ -31,7 +33,7 @@ public abstract class DefaultTaskServer extends ServerTask {
             task.put(LogInfo.SERVER_METHOD, hm.method.getName());
             task.put(LogInfo.LOGO, LogInfo.SERVER_PROCESSING_METHD_START);
             this.getLogger().info(task.toJSONString());
-            Object obj = Decoding(this.Req.getBody());
+            Object[] obj = Decoding(this.Req.getBody(), hm.method);
             Object resp = hm.method.invoke(hm.object, obj);
             byte[] rb = Encoding(resp);
             //将处理结果编码后的二进制对象放入ProtoRespMsg对象的body中
@@ -63,7 +65,7 @@ public abstract class DefaultTaskServer extends ServerTask {
         }
     }
 
-    protected abstract Object Decoding(ByteString rb) throws InvalidProtocolBufferException;
+    protected abstract Object[] Decoding(ByteString rb, Method m) throws InvalidProtocolBufferException;
 
     protected abstract byte[] Encoding(Object obj);
 
