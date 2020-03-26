@@ -179,7 +179,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         Class<? extends DefaultTaskServer> st = tasks.get(path);
         Constructor stc = null;
         try {
-            stc = st.getDeclaredConstructor(ProtocolResqMsgProto.ProtocolRespMsg.class, ChannelHandlerContext.class);
+            stc = st.getDeclaredConstructor(ProtocolReqMsgProto.ProtocolReqMsg.class, ChannelHandlerContext.class);
         } catch (Exception e) {
             logger.error("get defaultTaskServer constructor fail ! err = {}", e.toString());
             return null;
