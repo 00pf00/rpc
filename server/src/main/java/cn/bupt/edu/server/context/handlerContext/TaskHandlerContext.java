@@ -12,7 +12,7 @@ import cn.bupt.edu.server.task.DefaultTaskServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AdvisedSupport;
-import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Field;
@@ -37,10 +37,14 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
 
     @Override
     public void RegisterMethod(String path, HandlerController handler, int... bc) {
-        try {
-            handler = (HandlerController)getCglibProxyTargetObject(handler);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (AopUtils.isCglibProxy(handler)) {
+            logger.info("controller is cglib object ");
+            try {
+                handler = (HandlerController) getCglibProxyTargetObject(handler);
+            } catch (Exception e) {
+                logger.error("get cglib target object fail err = {}", e.toString());
+                return;
+            }
         }
         ConcurrentHashMap<String, Method> controller = new ConcurrentHashMap<>();
         java.lang.reflect.Method[] ms = handler.getClass().getMethods();
@@ -67,7 +71,6 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
                 logger.info("register service = {}", rm.value()[0]);
             }
             handlerMap.put(path, controller);
-
             if (bc.length > 0) {
                 ArrayBlockingQueue<Object> beanQueue = new ArrayBlockingQueue<>(bc[1]);
                 beanQueue.add(handler);
@@ -191,7 +194,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         advised.setAccessible(true);
 
         Object target = ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
-        logger.info("target class name = {}",target.getClass().getName());
+        logger.info("target class name = {}", target.getClass().getName());
         return target;
     }
 }

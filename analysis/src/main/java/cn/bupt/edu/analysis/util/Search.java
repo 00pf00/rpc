@@ -50,14 +50,14 @@ public class Search {
             } else {
                 if (map.get(LogInfo.LOGO).equals(attr1) && uuid.equals(map.get(LogInfo.UUID).toString())) {
                     JSONObject json = new JSONObject();
-                     json.put(attr, time - Long.valueOf(String.valueOf( map.get(LogInfo.TIME))).longValue());
+                    json.put(attr, time - Long.valueOf(String.valueOf(map.get(LogInfo.TIME))).longValue());
                     ElasticsearchRestClient.insertJson(json);
 
 
                 }
                 if (map.get(LogInfo.LOGO).equals(attr2) && uuid.equals(map.get(LogInfo.UUID).toString())) {
                     JSONObject json = new JSONObject();
-                    json.put(attr, Long.valueOf(String.valueOf( map.get(LogInfo.TIME))).longValue() - time);
+                    json.put(attr, Long.valueOf(String.valueOf(map.get(LogInfo.TIME))).longValue() - time);
                     ElasticsearchRestClient.insertJson(json);
                 }
                 uuid = "";

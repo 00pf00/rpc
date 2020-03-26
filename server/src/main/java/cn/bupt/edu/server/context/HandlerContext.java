@@ -7,7 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 public interface HandlerContext {
     public void RegisterHandler(String path, HandlerController handler, ArrayBlockingQueue queue);
 
-    public void RegisterMethod(String path, HandlerController handler,int... bc);
+    public void RegisterMethod(String path, HandlerController handler, int... bc);
 
     public void RemoveHandler(String path);
 
