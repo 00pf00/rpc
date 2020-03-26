@@ -1,7 +1,6 @@
 package cn.bupt.edu.server.context.handlerContext;
 
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
-import cn.bupt.edu.base.protocol.ProtocolResqMsgProto;
 import cn.bupt.edu.base.util.Util;
 import cn.bupt.edu.server.anotate.HandlerMapping;
 import cn.bupt.edu.server.anotate.TaskMapping;
@@ -10,7 +9,7 @@ import cn.bupt.edu.server.context.HandlerMethod;
 import cn.bupt.edu.server.context.TaskContext;
 import cn.bupt.edu.server.context.springContext.SpringContext;
 import cn.bupt.edu.server.controller.HandlerController;
-import cn.bupt.edu.server.task.DefaultTaskServer;
+import cn.bupt.edu.server.task.DefaultServerTask;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     private final static Logger logger = LoggerFactory.getLogger(TaskHandlerContext.class);
     private static TaskHandlerContext ctx;
     private static ConcurrentHashMap<String, ArrayBlockingQueue<Object>> handlers = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, Class<? extends DefaultTaskServer>> tasks = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Class<? extends DefaultServerTask>> tasks = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, ConcurrentHashMap<String, Method>> handlerMap = new ConcurrentHashMap<>();
 
     public static TaskHandlerContext getInstance() {
@@ -156,8 +155,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             ctx.RegisterMethod(entry.getKey(), entry.getValue(), bc);
         }
         logger.info("start register task");
-        Map<String, DefaultTaskServer> tasks = SpringContext.getBeansOfType(DefaultTaskServer.class);
-        for (Map.Entry<String, DefaultTaskServer> entry : tasks.entrySet()) {
+        Map<String, DefaultServerTask> tasks = SpringContext.getBeansOfType(DefaultServerTask.class);
+        for (Map.Entry<String, DefaultServerTask> entry : tasks.entrySet()) {
             logger.info("register task = {}", entry.getKey());
             ctx.RegisterTask(entry.getValue());
         }
@@ -165,8 +164,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     }
 
     @Override
-    public void RegisterTask(DefaultTaskServer task) {
-        Class<? extends DefaultTaskServer> tclass = task.getClass();
+    public void RegisterTask(DefaultServerTask task) {
+        Class<? extends DefaultServerTask> tclass = task.getClass();
         TaskMapping taskMapping = task.getClass().getAnnotation(TaskMapping.class);
         for (String path : taskMapping.paths()) {
             tasks.put(path, tclass);
@@ -175,8 +174,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
     }
 
     @Override
-    public DefaultTaskServer GetTask(String path, ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
-        Class<? extends DefaultTaskServer> st = tasks.get(path);
+    public DefaultServerTask GetTask(String path, ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
+        Class<? extends DefaultServerTask> st = tasks.get(path);
         Constructor stc = null;
         try {
             stc = st.getDeclaredConstructor(ProtocolReqMsgProto.ProtocolReqMsg.class, ChannelHandlerContext.class);
@@ -192,8 +191,8 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             logger.error("get defaultTaskServer object fail ! err = {} ", e.toString());
             return null;
         }
-        if (sto instanceof DefaultTaskServer) {
-            return (DefaultTaskServer) sto;
+        if (sto instanceof DefaultServerTask) {
+            return (DefaultServerTask) sto;
         }
         return null;
     }

@@ -9,17 +9,16 @@ import cn.bupt.edu.server.context.HandlerMethod;
 import cn.bupt.edu.server.context.handlerContext.TaskHandlerContext;
 import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.lang.reflect.Method;
 
-public abstract class DefaultTaskServer extends ServerTask {
-    protected DefaultTaskServer(ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
+public abstract class DefaultServerTask extends ServerTask {
+    protected DefaultServerTask(ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx) {
         super(req, ctx);
     }
 
-    public DefaultTaskServer() {
+    public DefaultServerTask() {
     }
 
     @Override
@@ -67,7 +66,7 @@ public abstract class DefaultTaskServer extends ServerTask {
         }
     }
 
-    protected abstract Object[] Decoding(ByteString rb, Method m) throws InvalidProtocolBufferException;
+    protected abstract Object[] Decoding(ByteString rb, Method m);
 
     protected abstract byte[] Encoding(Object obj);
 

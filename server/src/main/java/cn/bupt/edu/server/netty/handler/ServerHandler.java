@@ -7,7 +7,7 @@ import cn.bupt.edu.base.task.server.ServerFutureTask;
 import cn.bupt.edu.base.util.Status;
 import cn.bupt.edu.server.Thread.ServerThreadPool;
 import cn.bupt.edu.server.context.handlerContext.TaskHandlerContext;
-import cn.bupt.edu.server.task.DefaultTaskServer;
+import cn.bupt.edu.server.task.DefaultServerTask;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 builder.setStatus(Status.STATUS_NOTINIT);
                 ctx.writeAndFlush(builder.build());
             } else {
-                DefaultTaskServer task = TaskHandlerContext.getInstance().GetTask(req.getPath(), req, ctx);
+                DefaultServerTask task = TaskHandlerContext.getInstance().GetTask(req.getPath(), req, ctx);
                 ServerFutureTask ftask = new ServerFutureTask(task, null);
                 es.execute(ftask);
                 for (int i = 0; i < flist.length; i++) {

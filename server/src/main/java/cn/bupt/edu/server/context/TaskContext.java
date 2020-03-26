@@ -1,11 +1,11 @@
 package cn.bupt.edu.server.context;
 
 import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
-import cn.bupt.edu.server.task.DefaultTaskServer;
+import cn.bupt.edu.server.task.DefaultServerTask;
 import io.netty.channel.ChannelHandlerContext;
 
 public interface TaskContext {
-    public void RegisterTask(DefaultTaskServer task);
+    public void RegisterTask(DefaultServerTask task);
 
-    public DefaultTaskServer GetTask(String path, ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx);
+    public DefaultServerTask GetTask(String path, ProtocolReqMsgProto.ProtocolReqMsg req, ChannelHandlerContext ctx);
 }
