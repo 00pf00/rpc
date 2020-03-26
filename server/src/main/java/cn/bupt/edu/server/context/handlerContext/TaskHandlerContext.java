@@ -47,7 +47,6 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         boolean flag = false;
         for (int i = 0; i < ms.length; i++) {
 
-            //HandlerMapping handlerMapping = AnnotationUtils.findAnnotation(ms[i], HandlerMapping.class);
             HandlerMapping handlerMapping = ms[i].getAnnotation(HandlerMapping.class);
             if (handlerMapping == null) {
                 continue;
@@ -59,7 +58,6 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
             }
         }
         if (flag) {
-            //RequestMapping rm = AnnotationUtils.findAnnotation(handler.getClass(), RequestMapping.class);
             RequestMapping rm = handler.getClass().getAnnotation(RequestMapping.class);
             if (rm == null) {
                 path = "/" + path;
