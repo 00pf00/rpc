@@ -31,8 +31,10 @@ public class JsonServerTask extends DefaultServerTask {
         for (int i = 0; i < ts.length; i++) {
             Object obj = null;
             if (ps[i].getType().equals(String.class)) {
+                this.getLogger().info(" param = {}",js.get(ts[i]));
                 obj = js.get(ts[i]).toString();
             } else {
+                this.getLogger().info(" param = {}",js.get(ts[i]));
                 obj = JSON.parseObject(js.get(ts[i]).toString(), ps[i].getType());
             }
             os[i] = obj;
