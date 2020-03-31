@@ -22,7 +22,7 @@ public class JsonServerTask extends DefaultServerTask {
     @Override
     protected Object[] Decoding(ByteString rb, Method m) {
         DefaultParameterNameDiscoverer dpnd = new DefaultParameterNameDiscoverer();
-        JSONObject js = JSON.parseObject(rb.toString());
+        JSONObject js = JSON.parseObject(rb.toByteArray(), JSONObject.class);
         String[] ts = dpnd.getParameterNames(m);
         Object[] os = new Object[ts.length];
         Parameter[] ps = m.getParameters();
