@@ -20,7 +20,7 @@ public class ChannelPipelineFactory extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new IdleStateHandler(10, 0, 0));
         //pipline.addLast(new HeartBeatHandler(10));
         ByteBuf delimiter = Unpooled.copiedBuffer(Const.DELIMITER);
-        pipeline.addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
+        pipeline.addLast(new DelimiterBasedFrameDecoder(1024*1024, delimiter));
         pipeline.addLast(new EncodeHandler());
         pipeline.addLast(new DecodeHandler());
         pipeline.addLast(new HeartBeatHandler());
