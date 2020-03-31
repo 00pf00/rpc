@@ -23,7 +23,9 @@ public class JsonServerTask extends DefaultServerTask {
     protected Object[] Decoding(ByteString rb, Method m) {
         DefaultParameterNameDiscoverer dpnd = new DefaultParameterNameDiscoverer();
         JSONObject js = JSON.parseObject(rb.toByteArray(), JSONObject.class);
+        this.getLogger().info("parse param object = {}",js);
         String[] ts = dpnd.getParameterNames(m);
+        this.getLogger().info(" params = {}",ts);
         Object[] os = new Object[ts.length];
         Parameter[] ps = m.getParameters();
         for (int i = 0; i < ts.length; i++) {
