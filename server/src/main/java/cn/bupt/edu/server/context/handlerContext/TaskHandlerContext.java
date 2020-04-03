@@ -109,7 +109,7 @@ public class TaskHandlerContext implements HandlerContext, TaskContext {
         for (String key : handlers.keySet()) {
             if (path.startsWith(key)) {
                 ConcurrentHashMap<String, Method> hms = handlerMap.get(key);
-                m = hms.get(path.replace(key, ""));
+                m = hms.get(path.substring(key.length()));
                 if (m != null) {
                     beanQueue = handlers.get(key);
                     beanPath = key;

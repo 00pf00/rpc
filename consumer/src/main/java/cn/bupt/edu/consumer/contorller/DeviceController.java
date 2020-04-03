@@ -38,12 +38,12 @@ public class DeviceController {
             String uuid = RPCUUID.getUUID();
             reqBuilder.setUuid(uuid);
             reqBuilder.setVersion(1);
-//        reqBuilder.addChain("device");
-//        reqBuilder.setPath("/device/deviceinfo");
-            reqBuilder.addChain("chains");
-            reqBuilder.setPath("/chains/chaininfo");
+            reqBuilder.addChain("device");
+            reqBuilder.setPath("/device/deviceinfo");
+//            reqBuilder.addChain("chains");
+//            reqBuilder.setPath("/chains/chaininfo");
             reqBuilder.setBody(ByteString.copyFrom(device));
-            ProtocolReqMsgProto.ProtocolReqMsg req = reqBuilder.build();
+            final ProtocolReqMsgProto.ProtocolReqMsg req = reqBuilder.build();
             ClientTask tc = new ClientTask() {
                 @Override
                 public Object call() throws Exception {
@@ -105,7 +105,7 @@ public class DeviceController {
             reqBuilder.addChain("restchains");
             reqBuilder.setPath("/restchains/save");
             reqBuilder.setBody(ByteString.copyFrom(device));
-            ProtocolReqMsgProto.ProtocolReqMsg req = reqBuilder.build();
+            final ProtocolReqMsgProto.ProtocolReqMsg req = reqBuilder.build();
             ClientTask tc = new ClientTask() {
                 @Override
                 public Object call() throws Exception {

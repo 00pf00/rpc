@@ -5,6 +5,7 @@ import cn.bupt.edu.base.task.client.ClientFutureTask;
 import cn.bupt.edu.base.task.client.ClientTask;
 import cn.bupt.edu.base.thread.ParentThread;
 import cn.bupt.edu.client.datadispatch.ClientTaskMap;
+import cn.bupt.edu.server.anotate.HandlerMapping;
 import cn.bupt.edu.server.channel.Client;
 import cn.bupt.edu.server.controller.HandlerController;
 import cn.bupt.edu.server.entity.DeviceInfoProto;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class DeviceController extends HandlerController {
     @GetMapping("/deviceinfo")
     @ResponseBody
+    @HandlerMapping(path = "/deviceinfo")
     public byte[] getDeviceInfo(ByteString device) throws Exception {
         DeviceInfoProto.DeviceInfo deviceInfo = DeviceInfoProto.DeviceInfo.parseFrom(device);
         this.getLog().info("device name = {}", deviceInfo.getName());

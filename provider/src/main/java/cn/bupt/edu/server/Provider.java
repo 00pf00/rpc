@@ -21,6 +21,6 @@ public class Provider {
         };
         new Thread(rc).start();
         logger.info("Provider start clinet");
-        ChannelServer.getInstance().initChannelServer();
+        ChannelServer.getInstance().initChannelServer(8000);
     }
 }
